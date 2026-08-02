@@ -124,7 +124,9 @@
   figure.shot { margin: 0; background: var(--card-2); border: 1px solid var(--border); border-radius: 14px; padding: 10px; text-align: center; }
   figure.shot img {
     width: 100%; border-radius: 10px; border: 1px solid rgba(255,255,255,0.06); display: block; margin-bottom: 8px;
+    cursor: zoom-in; transition: opacity 0.15s;
   }
+  figure.shot img:hover { opacity: 0.85; }
   figure.shot figcaption { font-size: 11.5px; color: var(--muted); line-height: 1.5; }
   figure.shot figcaption .cap-text { display: block; margin-bottom: 4px; color: var(--text); }
   a.figma-link {
@@ -144,6 +146,31 @@
   .jira-card a:hover { text-decoration: underline; }
 
   .img-note { font-size: 12.5px; color: var(--muted); font-style: italic; margin-top: 10px; }
+
+  .zoom-hint {
+    display: inline-flex; align-items: center; gap: 6px; font-size: 13px; color: var(--muted);
+    background: var(--card-2); border: 1px solid var(--border); border-radius: 999px;
+    padding: 8px 16px; margin-bottom: 24px;
+  }
+  .zoom-hint b { color: var(--accent); }
+
+  /* lightbox */
+  .lightbox {
+    display: none; position: fixed; inset: 0; z-index: 999; background: rgba(4,8,7,0.94);
+    overflow: auto; padding: 32px 16px; text-align: center; cursor: zoom-out;
+  }
+  .lightbox.open { display: block; }
+  .lightbox img {
+    width: auto; height: auto; max-width: none; margin: 20px auto; display: inline-block;
+    border-radius: 12px; box-shadow: 0 10px 40px rgba(0,0,0,0.5); cursor: default;
+  }
+  .lightbox-close {
+    position: fixed; top: 16px; inset-inline-end: 20px; font-size: 34px; line-height: 1;
+    color: var(--text); cursor: pointer; z-index: 1000; background: rgba(255,255,255,0.08);
+    width: 44px; height: 44px; border-radius: 50%; display: flex; align-items: center; justify-content: center;
+  }
+  .lightbox-close:hover { color: var(--accent); }
+  .lightbox-caption { color: var(--muted); font-size: 13px; margin-top: -8px; }
 
   footer { text-align: center; color: var(--muted); font-size: 12px; margin-top: 44px; }
   footer .dot { color: var(--accent); }
@@ -241,6 +268,13 @@
       <li>The product is addictive &mdash; even in its most basic configuration, and before a player has risked a single private dollar, the need to keep tracking the standing and progress of an active tournament is a compelling trigger for action.</li>
     </ol>
   </section>
+
+  <div style="text-align:center;">
+    <span class="zoom-hint">
+      <span class="lang-he">🔍 <b>לחיצה על כל תמונה</b> תציג אותה בגודל המקורי המלא</span>
+      <span class="lang-en">🔍 <b>Click any screenshot</b> to view it at its full original size</span>
+    </span>
+  </div>
 
   <!-- UI -->
   <section class="area" id="ui">
@@ -548,6 +582,11 @@
 
 </div>
 
+<div class="lightbox" id="lightbox" onclick="if(event.target===this) closeLightbox()">
+  <span class="lightbox-close" onclick="closeLightbox()">&times;</span>
+  <img id="lightbox-img" src="" alt="">
+</div>
+
 <script>
 function setLang(lang) {
   document.body.className = 'lang-' + lang;
@@ -556,6 +595,26 @@ function setLang(lang) {
   document.getElementById('btn-he').classList.toggle('active', lang === 'he');
   document.getElementById('btn-en').classList.toggle('active', lang === 'en');
 }
+
+function openLightbox(src, alt) {
+  var img = document.getElementById('lightbox-img');
+  img.src = src;
+  img.alt = alt || '';
+  document.getElementById('lightbox').classList.add('open');
+  document.body.style.overflow = 'hidden';
+}
+function closeLightbox() {
+  document.getElementById('lightbox').classList.remove('open');
+  document.getElementById('lightbox-img').src = '';
+  document.body.style.overflow = '';
+}
+document.addEventListener('keydown', function (e) {
+  if (e.key === 'Escape') closeLightbox();
+});
+document.addEventListener('click', function (e) {
+  var img = e.target.closest('figure.shot img');
+  if (img) openLightbox(img.src, img.alt);
+});
 </script>
 </body>
 </html>
