@@ -1,0 +1,577 @@
+<!DOCTYPE html>
+<html lang="he" dir="rtl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Dividandy · סיכום בדיקות מוצר</title>
+<style>
+  :root {
+    --bg: #0a1211;
+    --bg-soft: #0d1716;
+    --card: #101c1b;
+    --card-2: #0d1a1c;
+    --accent: #cdfa3d;
+    --accent-soft: rgba(205,250,61,0.12);
+    --accent-dim: #93b83a;
+    --text: #eef3f1;
+    --muted: #8a9c96;
+    --border: rgba(255,255,255,0.09);
+    --dash: rgba(205,250,61,0.4);
+  }
+  * { box-sizing: border-box; }
+  body {
+    margin: 0;
+    font-family: "Inter", "Segoe UI", "Assistant", Arial, sans-serif;
+    background: var(--bg);
+    background-image: radial-gradient(ellipse 900px 500px at 20% -10%, rgba(205,250,61,0.06), transparent),
+                       radial-gradient(ellipse 700px 500px at 100% 20%, rgba(80,200,180,0.05), transparent);
+    color: var(--text);
+    line-height: 1.7;
+  }
+  body.lang-en .lang-he { display: none !important; }
+  body.lang-he .lang-en { display: none !important; }
+
+  .page { max-width: 960px; margin: 0 auto; padding: 40px 28px 100px; }
+
+  /* top nav */
+  .topnav {
+    display: flex; align-items: center; justify-content: space-between;
+    padding: 14px 22px; border: 1px solid var(--border); border-radius: 999px;
+    background: rgba(255,255,255,0.02); margin-bottom: 36px; flex-wrap: wrap; gap: 12px;
+  }
+  .brand { display: flex; align-items: center; gap: 8px; font-weight: 800; letter-spacing: 0.02em; }
+  .brand .dot { width: 9px; height: 9px; border-radius: 50%; background: var(--accent); box-shadow: 0 0 12px var(--accent); }
+  .nav-links { display: flex; gap: 6px; flex-wrap: wrap; }
+  .nav-links a {
+    color: var(--muted); text-decoration: none; font-size: 12.5px; padding: 7px 13px;
+    border-radius: 999px; border: 1px solid transparent;
+  }
+  .nav-links a:hover { color: var(--text); border-color: var(--border); }
+  .lang-toggle { display: flex; border: 1px solid var(--border); border-radius: 999px; overflow: hidden; }
+  .lang-toggle button {
+    border: none; background: transparent; padding: 7px 14px; font-size: 12.5px; cursor: pointer; color: var(--muted);
+  }
+  .lang-toggle button.active { background: var(--accent); color: #0a1211; font-weight: 700; }
+
+  header.doc-header { margin-bottom: 36px; }
+  .eyebrow {
+    display: inline-block; font-size: 11px; font-weight: 800; letter-spacing: 0.18em;
+    color: var(--accent); text-transform: uppercase; margin-bottom: 10px;
+  }
+  header.doc-header h1 { font-size: 32px; margin: 0 0 10px; letter-spacing: -0.01em; }
+  header.doc-header .meta { color: var(--muted); font-size: 14px; }
+
+  .stakeholders { display: flex; flex-wrap: wrap; gap: 10px; margin-top: 16px; }
+  .stakeholder-chip {
+    background: var(--card); border: 1px solid var(--border); border-radius: 999px;
+    padding: 7px 15px; font-size: 12.5px; color: var(--text);
+  }
+  .stakeholder-chip b { color: var(--accent); }
+
+  .toc {
+    background: var(--card); border: 1px solid var(--border); border-radius: 16px;
+    padding: 22px 26px; margin-bottom: 40px;
+  }
+  .toc h2 { font-size: 12px; margin: 0 0 14px; color: var(--muted); text-transform: uppercase; letter-spacing: 0.14em; font-weight: 700; }
+  .toc ol { margin: 0; padding-inline-start: 20px; }
+  .toc ol ol { margin-top: 4px; }
+  .toc li { margin-bottom: 4px; }
+  .toc a { color: var(--text); text-decoration: none; font-size: 14px; }
+  .toc a:hover { color: var(--accent); }
+
+  section.intro, section.area {
+    background: var(--card); border: 1px solid var(--border); border-radius: 18px;
+    padding: 34px; margin-bottom: 24px;
+  }
+  section h2 {
+    font-size: 21px; margin: 0 0 18px; display: flex; align-items: center; gap: 12px; font-weight: 800;
+  }
+  section h2::before {
+    content: ""; width: 7px; height: 24px; background: var(--accent); border-radius: 3px;
+    display: inline-block; box-shadow: 0 0 10px rgba(205,250,61,0.5);
+  }
+  .findings { padding-inline-start: 20px; margin: 16px 0 0; }
+  .findings li { margin-bottom: 10px; color: var(--text); }
+
+  .subsection { margin-top: 10px; padding-top: 26px; border-top: 1px dashed var(--border); }
+  .subsection:first-of-type { border-top: none; padding-top: 0; }
+  .subsection h3 {
+    font-size: 15px; margin: 0 0 12px; font-weight: 800; color: var(--accent);
+    text-transform: uppercase; letter-spacing: 0.08em;
+  }
+  .subsection h4 { font-size: 14px; color: var(--muted); margin: 16px 0 8px; font-weight: 700; }
+
+  .note {
+    background: var(--accent-soft); border: 1px solid rgba(205,250,61,0.25); border-radius: 12px;
+    padding: 14px 18px; font-size: 14px; margin-bottom: 18px; color: var(--text);
+  }
+  .note b { color: var(--accent); }
+
+  ul.feature-list, ol.feature-list { padding-inline-start: 20px; margin: 8px 0; color: var(--text); }
+  ul.feature-list li, ol.feature-list li { margin-bottom: 10px; }
+  ul.feature-list ul, ul.feature-list ol { margin-top: 8px; }
+  .muted-line { color: var(--muted); }
+
+  .placeholder {
+    background: rgba(255,255,255,0.02); border: 1.5px dashed var(--dash); border-radius: 12px;
+    padding: 14px 18px; color: var(--accent); font-size: 14px; margin: 10px 0;
+  }
+  .placeholder .owner { font-weight: 800; color: var(--text); }
+
+  /* screenshot gallery */
+  .shots { display: grid; grid-template-columns: repeat(auto-fill, minmax(140px, 1fr)); gap: 16px; margin: 12px 0 18px; }
+  .shots.single { grid-template-columns: minmax(140px, 220px); }
+  figure.shot { margin: 0; background: var(--card-2); border: 1px solid var(--border); border-radius: 14px; padding: 10px; text-align: center; }
+  figure.shot img {
+    width: 100%; border-radius: 10px; border: 1px solid rgba(255,255,255,0.06); display: block; margin-bottom: 8px;
+  }
+  figure.shot figcaption { font-size: 11.5px; color: var(--muted); line-height: 1.5; }
+  figure.shot figcaption .cap-text { display: block; margin-bottom: 4px; color: var(--text); }
+  a.figma-link {
+    display: inline-flex; align-items: center; gap: 4px; font-size: 11px; color: var(--accent);
+    text-decoration: none; border-bottom: 1px dotted var(--accent-dim);
+  }
+  a.figma-link:hover { color: var(--text); }
+
+  .jira-card {
+    border: 1px solid var(--border); border-radius: 14px; padding: 18px 20px; margin-top: 12px;
+    font-size: 14px; background: var(--card-2); border-left: 3px solid var(--accent);
+  }
+  html[dir="rtl"] .jira-card { border-left: none; border-right: 3px solid var(--accent); }
+  .jira-card .row { display: flex; gap: 8px; flex-wrap: wrap; margin-top: 10px; }
+  .jira-tag { background: rgba(255,255,255,0.06); border-radius: 6px; padding: 3px 10px; font-size: 11.5px; color: var(--muted); }
+  .jira-card a { color: var(--accent); text-decoration: none; }
+  .jira-card a:hover { text-decoration: underline; }
+
+  .img-note { font-size: 12.5px; color: var(--muted); font-style: italic; margin-top: 10px; }
+
+  footer { text-align: center; color: var(--muted); font-size: 12px; margin-top: 44px; }
+  footer .dot { color: var(--accent); }
+
+  @media (max-width: 700px) {
+    .page { padding: 20px 14px 70px; }
+    .topnav { flex-direction: column; align-items: stretch; border-radius: 20px; padding: 14px 16px; gap: 10px; }
+    .brand { justify-content: center; }
+    .nav-links { justify-content: center; }
+    .lang-toggle { align-self: center; }
+    header.doc-header h1 { font-size: 23px; line-height: 1.3; }
+    .eyebrow { font-size: 10px; }
+    section.intro, section.area { padding: 18px; border-radius: 14px; }
+    section h2 { font-size: 18px; }
+    .toc { padding: 16px 18px; }
+    .stakeholders { gap: 8px; }
+    .stakeholder-chip { font-size: 11.5px; padding: 6px 12px; }
+    .shots { grid-template-columns: repeat(auto-fill, minmax(110px, 1fr)); gap: 10px; }
+    .shots.single { grid-template-columns: minmax(110px, 45vw); }
+    figure.shot figcaption { font-size: 11px; }
+    .jira-card { padding: 14px 16px; font-size: 13px; }
+    .jira-card .row { gap: 6px; }
+  }
+  @media (max-width: 420px) {
+    header.doc-header h1 { font-size: 20px; }
+    .shots { grid-template-columns: repeat(auto-fill, minmax(95px, 1fr)); }
+    .nav-links a { font-size: 11px; padding: 6px 10px; }
+  }
+  img { max-width: 100%; height: auto; }
+  table { max-width: 100%; }
+</style>
+</head>
+<body class="lang-he">
+<div class="page">
+
+  <div class="topnav">
+    <div class="brand"><span class="dot"></span> Dividandy</div>
+    <div class="nav-links">
+      <a href="#intro"><span class="lang-he">מבוא</span><span class="lang-en">Intro</span></a>
+      <a href="#feedback"><span class="lang-he">פידבקים</span><span class="lang-en">Feedback</span></a>
+      <a href="#trade"><span class="lang-he">מסחר</span><span class="lang-en">Trade</span></a>
+      <a href="#ui"><span class="lang-he">UI</span><span class="lang-en">UI</span></a>
+      <a href="#tech"><span class="lang-he">טכנולוגיה</span><span class="lang-en">Tech</span></a>
+    </div>
+    <div class="lang-toggle">
+      <button id="btn-he" class="active" onclick="setLang('he')">עברית</button>
+      <button id="btn-en" onclick="setLang('en')">English</button>
+    </div>
+  </div>
+
+  <header class="doc-header">
+    <span class="eyebrow"><span class="lang-he">בדיקת מוצר · טור-ראנד</span><span class="lang-en">Product Test · Turnaround</span></span>
+    <h1><span class="lang-he">סיכום בדיקות מוצר בסביבת בקרה</span><span class="lang-en">Product Testing Summary &mdash; Control Environment</span></h1>
+    <div class="meta">
+      <span class="lang-he">עודכן לאחרונה: 2 באוגוסט 2026 · מסמך חי - מתעדכן בהמשך עם תכנים נוספים</span>
+      <span class="lang-en">Last updated: August 2, 2026 · Living document &mdash; more content to be added</span>
+    </div>
+    <div class="stakeholders">
+      <span class="stakeholder-chip"><b>איציק</b><span class="lang-he"> · CTO</span><span class="lang-en"> · CTO</span></span>
+      <span class="stakeholder-chip"><b><span class="lang-he">קובי</span><span class="lang-en">Koby</span></b> · CEO</span>
+      <span class="stakeholder-chip"><b><span class="lang-he">אינגריד</span><span class="lang-en">Ingrid</span></b><span class="lang-he"> · מנהלת מוניטיזציה</span><span class="lang-en"> · Head of Monetization</span></span>
+    </div>
+  </header>
+
+  <nav class="toc">
+    <h2><span class="lang-he">תוכן העניינים</span><span class="lang-en">Table of contents</span></h2>
+    <ol>
+      <li><a href="#intro"><span class="lang-he">מבוא</span><span class="lang-en">Introduction</span></a></li>
+      <li><a href="#feedback"><span class="lang-he">פידבקים כלליים שהתקבלו</span><span class="lang-en">General feedback received</span></a></li>
+      <li><a href="#trade"><span class="lang-he">חוויית מסחר ואזור טרייד</span><span class="lang-en">Trading experience &amp; trade area</span></a>
+        <ol>
+          <li><a href="#trade-area"><span class="lang-he">אזור טרייד</span><span class="lang-en">Trade area</span></a></li>
+          <li><a href="#portfolio"><span class="lang-he">ניהול פורטפוליו</span><span class="lang-en">Portfolio management</span></a></li>
+        </ol>
+      </li>
+      <li><a href="#ui"><span class="lang-he">ממשק ו-UI</span><span class="lang-en">Interface &amp; UI</span></a>
+        <ol>
+          <li><a href="#lobby"><span class="lang-he">אזור לובי</span><span class="lang-en">Lobby area</span></a></li>
+          <li><a href="#arena"><span class="lang-he">מסך משחק (ארנה)</span><span class="lang-en">Game screen (arena)</span></a></li>
+        </ol>
+      </li>
+      <li><a href="#tech"><span class="lang-he">טכנולוגיה</span><span class="lang-en">Technology</span></a></li>
+    </ol>
+  </nav>
+
+  <!-- INTRO -->
+  <section class="intro" id="intro">
+    <h2><span class="lang-he">מבוא</span><span class="lang-en">Introduction</span></h2>
+    <p class="lang-he">במהלך השבועיים האחרונים הרצנו את המוצר שלנו בסביבת בדיקה. למרות שהמוצר אינו גמור וסובל ממחלות ילדות שונות, 3 דברים בלטו באופן מובהק:</p>
+    <p class="lang-en">Over the past two weeks we ran our product in a test environment. While the product is not yet finished and still has various growing pains, three things stood out clearly:</p>
+    <ol class="findings lang-he">
+      <li>המוצר הוא הרבה מעבר ל-MVP סטנדרטי, ומכיל יכולות ופיצ׳רים רבים שהופכים אותו למתקדם יותר בכמה דורות.</li>
+      <li>המוצר אינו שלם עדיין וזקוק להשלמות - לא רק ברמת חוויית המשתמש, אלא גם ברכיבים טכנולוגיים בסיסיים בתשתית (סגמנטציה, יציבות, ניהול מלא של תשלומים וכו׳).</li>
+      <li>המוצר ממכר - גם בתצורה הבסיסית ביותר, ולפני שמישהו סיכן אפילו דולר אחד פרטי, הצורך במעקב שוטף אחרי המיקום והתפתחות הטורניר הפעיל הוא טריגר מדרבן לפעולה.</li>
+    </ol>
+    <ol class="findings lang-en">
+      <li>The product is far beyond a standard MVP, and includes many capabilities and features that make it several generations more advanced.</li>
+      <li>The product is not yet complete and needs work &mdash; not only at the user-experience level, but also in basic technological infrastructure components (segmentation, stability, full payment management, etc.).</li>
+      <li>The product is addictive &mdash; even in its most basic configuration, and before a player has risked a single private dollar, the need to keep tracking the standing and progress of an active tournament is a compelling trigger for action.</li>
+    </ol>
+  </section>
+
+  <!-- GENERAL FEEDBACK -->
+  <section class="area" id="feedback">
+    <h2><span class="lang-he">פידבקים כלליים שהתקבלו</span><span class="lang-en">General feedback received</span></h2>
+    <div class="placeholder"><span class="lang-he">ממתין לתוכן.</span><span class="lang-en">Awaiting content.</span></div>
+  </section>
+
+  <!-- TRADE -->
+  <section class="area" id="trade">
+    <h2><span class="lang-he">חוויית מסחר ואזור טרייד</span><span class="lang-en">Trading experience &amp; trade area</span></h2>
+    <div class="note">
+      <span class="lang-he"><b>פידבק מוביל:</b> יש לחזור אל המודל הסטנדרטי הפשוט של חוויית המסחר.</span>
+      <span class="lang-en"><b>Leading feedback:</b> we should go back to the simple, standard trading experience model.</span>
+    </div>
+
+    <div class="subsection" id="trade-area">
+      <h3><span class="lang-he">אזור טרייד</span><span class="lang-en">Trade area</span></h3>
+      <ul class="feature-list lang-he">
+        <li>מנגנון המסחר עוצב מחדש: השחקן אינו עוזב יותר את הארנה למסך נפרד בלחיצה על "טרייד" - כל תהליך המסחר מתבצע כעת בחלונות מגירה צפים (floating drawers), כך שהשחקן נשאר תמיד בתוך הארנה.
+          <div class="shots single">
+            <figure class="shot"><img src="images/trade-category.png" alt="מסך קטגוריה"><figcaption><span class="cap-text">מסך קטגוריה</span><a class="figma-link" target="_blank" href="https://www.figma.com/design/fZBkCMGoM4WavVNxHdHQRV/Fox-Area?node-id=7455-91258&t=yj0ExRLBvLIL2Doa-11">Figma ↗</a></figcaption></figure>
+          </div>
+        </li>
+        <li>בראש החלון מוצגת רשימת קטגוריות המסחר:
+          <ul>
+            <li>הרשימה מציגה כעת תמיד את שם הנכס ואת הסימבול שלו.</li>
+            <li>נשמרה האפשרות לגרור נכס שמאלה לביצוע עסקה מהירה.
+              <div class="shots single">
+                <figure class="shot"><img src="images/trade-quick-swipe.png" alt="גרירה לעסקה מהירה"><figcaption><span class="cap-text">גרירה לעסקה מהירה</span><a class="figma-link" target="_blank" href="https://www.figma.com/design/fZBkCMGoM4WavVNxHdHQRV/Fox-Area?node-id=7455-96497&t=yj0ExRLBvLIL2Doa-11">Figma ↗</a></figcaption></figure>
+              </div>
+            </li>
+          </ul>
+        </li>
+        <li>מתחת לרשימת הקטגוריות נמצא חלון חיפוש, ומתחתיו סינוני קטגוריות: ABC, שווי שוק, הכי עולות/יורדות - עם אפשרות מיון עולה/יורד.</li>
+        <li>מתחת לרשימת הנכסים נמצאים כעת 3 כפתורים:
+          <div class="shots">
+            <figure class="shot"><img src="images/trade-watchlist.png" alt="Watchlist"><figcaption><span class="cap-text"><b>Watchlist</b> - פותח את חלון הנכסים השמורים כשכבה נוספת</span><a class="figma-link" target="_blank" href="https://www.figma.com/design/fZBkCMGoM4WavVNxHdHQRV/Fox-Area?node-id=7455-98774&t=yj0ExRLBvLIL2Doa-11">Figma ↗</a></figcaption></figure>
+            <figure class="shot"><img src="images/trade-dd-chat.png" alt="DD Chat"><figcaption><span class="cap-text"><b>DD Chat</b> - פותח את חלון הצ׳אט כשכבה נוספת</span><a class="figma-link" target="_blank" href="https://www.figma.com/design/fZBkCMGoM4WavVNxHdHQRV/Fox-Area?node-id=7455-105310&t=yj0ExRLBvLIL2Doa-11">Figma ↗</a></figcaption></figure>
+            <figure class="shot"><img src="images/trade-market-info.png" alt="Market Info"><figcaption><span class="cap-text"><b>Market Info</b> - פותח את חלון המידע כשכבה נוספת</span><a class="figma-link" target="_blank" href="https://www.figma.com/design/fZBkCMGoM4WavVNxHdHQRV/Fox-Area?node-id=7455-101920&t=yj0ExRLBvLIL2Doa-11">Figma ↗</a></figcaption></figure>
+          </div>
+        </li>
+        <li><b>מסך נכס:</b> פידבק - יותר מדי פרטים לא רלוונטיים לחוויית המסחר; יש לפשט את התפעול. אזור "People also show interest in these stocks" הוסר.
+          <div class="shots single">
+            <figure class="shot"><img src="images/trade-asset-screen.png" alt="מסך נכס"><figcaption><span class="cap-text">מסך נכס</span><a class="figma-link" target="_blank" href="https://www.figma.com/design/fZBkCMGoM4WavVNxHdHQRV/Fox-Area?node-id=7455-93775&t=yj0ExRLBvLIL2Doa-11">Figma ↗</a></figcaption></figure>
+          </div>
+        </li>
+        <li>מסך <b>Execute Buy</b> ממוקם כעת בחלון מגירה צף, עם אפשרות חדשה להוספה ל-Watchlist.
+          <div class="shots single">
+            <figure class="shot"><img src="images/trade-quick-swipe.png" alt="Execute Buy"><figcaption><span class="cap-text">Execute Buy</span><a class="figma-link" target="_blank" href="https://www.figma.com/design/fZBkCMGoM4WavVNxHdHQRV/Fox-Area?node-id=7455-96497&t=yj0ExRLBvLIL2Doa-11">Figma ↗</a></figcaption></figure>
+          </div>
+        </li>
+      </ul>
+      <ul class="feature-list lang-en">
+        <li>The trading mechanism was redesigned: the player no longer leaves the arena for a separate screen when tapping "Trade" &mdash; the entire trading flow now happens in floating drawer windows, so the player always stays inside the arena.
+          <div class="shots single">
+            <figure class="shot"><img src="images/trade-category.png" alt="Category screen"><figcaption><span class="cap-text">Category screen</span><a class="figma-link" target="_blank" href="https://www.figma.com/design/fZBkCMGoM4WavVNxHdHQRV/Fox-Area?node-id=7455-91258&t=yj0ExRLBvLIL2Doa-11">Figma ↗</a></figcaption></figure>
+          </div>
+        </li>
+        <li>The trade category list appears at the top of the window:
+          <ul>
+            <li>The list now always shows the asset name and its symbol.</li>
+            <li>The ability to swipe an asset left for a quick trade was kept.
+              <div class="shots single">
+                <figure class="shot"><img src="images/trade-quick-swipe.png" alt="Swipe for quick trade"><figcaption><span class="cap-text">Swipe for quick trade</span><a class="figma-link" target="_blank" href="https://www.figma.com/design/fZBkCMGoM4WavVNxHdHQRV/Fox-Area?node-id=7455-96497&t=yj0ExRLBvLIL2Doa-11">Figma ↗</a></figcaption></figure>
+              </div>
+            </li>
+          </ul>
+        </li>
+        <li>Below the category list is a search box, and below that, category filters: ABC, market cap, top gainers/losers &mdash; with ascending/descending sort.</li>
+        <li>Below the asset list there are now 3 buttons:
+          <div class="shots">
+            <figure class="shot"><img src="images/trade-watchlist.png" alt="Watchlist"><figcaption><span class="cap-text"><b>Watchlist</b> &mdash; opens the saved-assets window as an additional layer</span><a class="figma-link" target="_blank" href="https://www.figma.com/design/fZBkCMGoM4WavVNxHdHQRV/Fox-Area?node-id=7455-98774&t=yj0ExRLBvLIL2Doa-11">Figma ↗</a></figcaption></figure>
+            <figure class="shot"><img src="images/trade-dd-chat.png" alt="DD Chat"><figcaption><span class="cap-text"><b>DD Chat</b> &mdash; opens the chat window as an additional layer</span><a class="figma-link" target="_blank" href="https://www.figma.com/design/fZBkCMGoM4WavVNxHdHQRV/Fox-Area?node-id=7455-105310&t=yj0ExRLBvLIL2Doa-11">Figma ↗</a></figcaption></figure>
+            <figure class="shot"><img src="images/trade-market-info.png" alt="Market Info"><figcaption><span class="cap-text"><b>Market Info</b> &mdash; opens the info window as an additional layer</span><a class="figma-link" target="_blank" href="https://www.figma.com/design/fZBkCMGoM4WavVNxHdHQRV/Fox-Area?node-id=7455-101920&t=yj0ExRLBvLIL2Doa-11">Figma ↗</a></figcaption></figure>
+          </div>
+        </li>
+        <li><b>Asset screen:</b> feedback &mdash; too many details irrelevant to the trading experience; operation should be simplified. The "People also show interest in these stocks" area was removed.
+          <div class="shots single">
+            <figure class="shot"><img src="images/trade-asset-screen.png" alt="Asset screen"><figcaption><span class="cap-text">Asset screen</span><a class="figma-link" target="_blank" href="https://www.figma.com/design/fZBkCMGoM4WavVNxHdHQRV/Fox-Area?node-id=7455-93775&t=yj0ExRLBvLIL2Doa-11">Figma ↗</a></figcaption></figure>
+          </div>
+        </li>
+        <li>The <b>Execute Buy</b> screen now sits in a floating drawer window, with a new option to add the asset to the watchlist.
+          <div class="shots single">
+            <figure class="shot"><img src="images/trade-quick-swipe.png" alt="Execute Buy"><figcaption><span class="cap-text">Execute Buy</span><a class="figma-link" target="_blank" href="https://www.figma.com/design/fZBkCMGoM4WavVNxHdHQRV/Fox-Area?node-id=7455-96497&t=yj0ExRLBvLIL2Doa-11">Figma ↗</a></figcaption></figure>
+          </div>
+        </li>
+      </ul>
+    </div>
+
+    <div class="subsection" id="portfolio">
+      <h3><span class="lang-he">ניהול פורטפוליו</span><span class="lang-en">Portfolio management</span></h3>
+
+      <div class="placeholder lang-he"><span class="owner">ממתין לאיציק (CTO):</span> יש לרשום ב-trade history את כל הפעולות, כולל SL/TP ו-limit.</div>
+      <div class="placeholder lang-en"><span class="owner">Pending Icyk (CTO):</span> all actions, including SL/TP and limit orders, need to be logged in trade history.</div>
+
+      <p class="lang-he">בוצעו התאמות צבע וגודל להבחנה ברורה בין מסכי המסחר לבין מסכי הפורטפוליו.</p>
+      <p class="lang-en">Color and size adjustments were made to clearly distinguish between trading screens and portfolio screens.</p>
+
+      <h4>Open Positions</h4>
+      <ul class="feature-list lang-he">
+        <li>הנתונים המוצגים לכל נכס: Entry value (קבוע או ממוצע עבור מספר נכסים), Current value (קבוע/ממוצע), שם הנכס, סוג הפעולה (קניה/מכירה בחסר), חיווי SL/TP, PnL בדולרים, PnL באחוזים.
+          <div class="shots single">
+            <figure class="shot"><img src="images/portfolio-open-positions.png" alt="נתוני פוזיציה"><figcaption><span class="cap-text">נתוני פוזיציה</span><a class="figma-link" target="_blank" href="https://www.figma.com/design/fZBkCMGoM4WavVNxHdHQRV/Fox-Area?node-id=7455-111449&t=yj0ExRLBvLIL2Doa-11">Figma ↗</a></figcaption></figure>
+          </div>
+        </li>
+        <li>גרירה שמאלה או לחיצה על נכס חושפת תפריט הכולל: Info, Flip, Modify, Close.
+          <div class="shots single">
+            <figure class="shot"><img src="images/portfolio-position-menu.png" alt="תפריט פוזיציה"><figcaption><span class="cap-text">תפריט פוזיציה</span><a class="figma-link" target="_blank" href="https://www.figma.com/design/fZBkCMGoM4WavVNxHdHQRV/Fox-Area?node-id=7455-113219&t=yj0ExRLBvLIL2Doa-11">Figma ↗</a></figcaption></figure>
+          </div>
+          <ul>
+            <li><b>Info</b> - פותח את חלון הנכס עם פרטי הנכס וגרף הכולל סימוני SL/TP ומחיר כניסה לפוזיציה. החלון מוצג בשתי תצורות:
+              <div class="shots">
+                <figure class="shot"><img src="images/portfolio-info-multi.png" alt="מולטי פוזיציות"><figcaption><span class="cap-text">מולטי פוזיציות</span><a class="figma-link" target="_blank" href="https://www.figma.com/design/fZBkCMGoM4WavVNxHdHQRV/Fox-Area?node-id=7455-134977&t=yj0ExRLBvLIL2Doa-11">Figma ↗</a></figcaption></figure>
+                <figure class="shot"><img src="images/portfolio-info-single.png" alt="פוזיציה יחידה"><figcaption><span class="cap-text">פוזיציה יחידה</span><a class="figma-link" target="_blank" href="https://www.figma.com/design/fZBkCMGoM4WavVNxHdHQRV/Fox-Area?node-id=7455-139276&t=yj0ExRLBvLIL2Doa-11">Figma ↗</a></figcaption></figure>
+              </div>
+            </li>
+            <li><b>Flip</b> - פותח חלון ייעודי; השחקן יוכל להגדיר שמעתה הפקודה תבוצע בלחיצה בודדת.
+              <div class="shots single">
+                <figure class="shot"><img src="images/portfolio-flip.png" alt="חלון Flip"><figcaption><span class="cap-text">חלון Flip</span><a class="figma-link" target="_blank" href="https://www.figma.com/design/fZBkCMGoM4WavVNxHdHQRV/Fox-Area?node-id=7187-60054&t=yj0ExRLBvLIL2Doa-11">Figma ↗</a></figcaption></figure>
+              </div>
+            </li>
+            <li><b>Modify</b> - פותח חלון בעל 2 טאבים: הגדרת ערכי SL/TP, וסגירה חלקית של הפוזיציה.
+              <div class="shots">
+                <figure class="shot"><img src="images/portfolio-modify-tab1.png" alt="Modify - טאב 1"><figcaption><span class="cap-text">Modify - טאב 1</span><a class="figma-link" target="_blank" href="https://www.figma.com/design/fZBkCMGoM4WavVNxHdHQRV/Fox-Area?node-id=7187-59599&t=yj0ExRLBvLIL2Doa-11">Figma ↗</a></figcaption></figure>
+                <figure class="shot"><img src="images/portfolio-modify-tab2.png" alt="Modify - טאב 2"><figcaption><span class="cap-text">Modify - טאב 2</span><a class="figma-link" target="_blank" href="https://www.figma.com/design/fZBkCMGoM4WavVNxHdHQRV/Fox-Area?node-id=7187-59776&t=yj0ExRLBvLIL2Doa-11">Figma ↗</a></figcaption></figure>
+              </div>
+            </li>
+            <li><b>Close</b> - פותח חלון ייעודי; השחקן יוכל להגדיר שמעתה הפקודה תבוצע בלחיצה בודדת.
+              <div class="shots single">
+                <figure class="shot"><img src="images/portfolio-close.png" alt="חלון Close"><figcaption><span class="cap-text">חלון Close</span><a class="figma-link" target="_blank" href="https://www.figma.com/design/fZBkCMGoM4WavVNxHdHQRV/Fox-Area?node-id=7187-59972&t=yj0ExRLBvLIL2Doa-11">Figma ↗</a></figcaption></figure>
+              </div>
+            </li>
+          </ul>
+        </li>
+      </ul>
+      <ul class="feature-list lang-en">
+        <li>Data shown per asset: entry value (fixed or averaged across several assets), current value (fixed/averaged), asset name, action type (buy / short sell), SL/TP indicator, PnL in dollars, PnL in percent.
+          <div class="shots single">
+            <figure class="shot"><img src="images/portfolio-open-positions.png" alt="Position data"><figcaption><span class="cap-text">Position data</span><a class="figma-link" target="_blank" href="https://www.figma.com/design/fZBkCMGoM4WavVNxHdHQRV/Fox-Area?node-id=7455-111449&t=yj0ExRLBvLIL2Doa-11">Figma ↗</a></figcaption></figure>
+          </div>
+        </li>
+        <li>Swiping left or tapping an asset reveals a menu with: Info, Flip, Modify, Close.
+          <div class="shots single">
+            <figure class="shot"><img src="images/portfolio-position-menu.png" alt="Position menu"><figcaption><span class="cap-text">Position menu</span><a class="figma-link" target="_blank" href="https://www.figma.com/design/fZBkCMGoM4WavVNxHdHQRV/Fox-Area?node-id=7455-113219&t=yj0ExRLBvLIL2Doa-11">Figma ↗</a></figcaption></figure>
+          </div>
+          <ul>
+            <li><b>Info</b> &mdash; opens the asset window with asset details and a chart including SL/TP markers and position entry price. The window appears in two configurations:
+              <div class="shots">
+                <figure class="shot"><img src="images/portfolio-info-multi.png" alt="Multi-position"><figcaption><span class="cap-text">Multi-position</span><a class="figma-link" target="_blank" href="https://www.figma.com/design/fZBkCMGoM4WavVNxHdHQRV/Fox-Area?node-id=7455-134977&t=yj0ExRLBvLIL2Doa-11">Figma ↗</a></figcaption></figure>
+                <figure class="shot"><img src="images/portfolio-info-single.png" alt="Single position"><figcaption><span class="cap-text">Single position</span><a class="figma-link" target="_blank" href="https://www.figma.com/design/fZBkCMGoM4WavVNxHdHQRV/Fox-Area?node-id=7455-139276&t=yj0ExRLBvLIL2Doa-11">Figma ↗</a></figcaption></figure>
+              </div>
+            </li>
+            <li><b>Flip</b> &mdash; opens a dedicated window; the player can set this action to execute with a single tap going forward.
+              <div class="shots single">
+                <figure class="shot"><img src="images/portfolio-flip.png" alt="Flip window"><figcaption><span class="cap-text">Flip window</span><a class="figma-link" target="_blank" href="https://www.figma.com/design/fZBkCMGoM4WavVNxHdHQRV/Fox-Area?node-id=7187-60054&t=yj0ExRLBvLIL2Doa-11">Figma ↗</a></figcaption></figure>
+              </div>
+            </li>
+            <li><b>Modify</b> &mdash; opens a window with 2 tabs: setting SL/TP values, and partial position close.
+              <div class="shots">
+                <figure class="shot"><img src="images/portfolio-modify-tab1.png" alt="Modify - tab 1"><figcaption><span class="cap-text">Modify - tab 1</span><a class="figma-link" target="_blank" href="https://www.figma.com/design/fZBkCMGoM4WavVNxHdHQRV/Fox-Area?node-id=7187-59599&t=yj0ExRLBvLIL2Doa-11">Figma ↗</a></figcaption></figure>
+                <figure class="shot"><img src="images/portfolio-modify-tab2.png" alt="Modify - tab 2"><figcaption><span class="cap-text">Modify - tab 2</span><a class="figma-link" target="_blank" href="https://www.figma.com/design/fZBkCMGoM4WavVNxHdHQRV/Fox-Area?node-id=7187-59776&t=yj0ExRLBvLIL2Doa-11">Figma ↗</a></figcaption></figure>
+              </div>
+            </li>
+            <li><b>Close</b> &mdash; opens a dedicated window; the player can set this action to execute with a single tap going forward.
+              <div class="shots single">
+                <figure class="shot"><img src="images/portfolio-close.png" alt="Close window"><figcaption><span class="cap-text">Close window</span><a class="figma-link" target="_blank" href="https://www.figma.com/design/fZBkCMGoM4WavVNxHdHQRV/Fox-Area?node-id=7187-59972&t=yj0ExRLBvLIL2Doa-11">Figma ↗</a></figcaption></figure>
+              </div>
+            </li>
+          </ul>
+        </li>
+      </ul>
+
+      <h4>Orders</h4>
+      <ul class="feature-list lang-he">
+        <li>גרירה או לחיצה על פקודה עתידית מציגה לשחקן 3 אפשרויות:
+          <ul>
+            <li><b>Flip</b> - השחקן יוכל להגדיר שמעתה הפקודה תבוצע בלחיצה בודדת.
+              <div class="shots single">
+                <figure class="shot"><img src="images/orders-flip.png" alt="חלון Flip"><figcaption><span class="cap-text">חלון Flip</span><a class="figma-link" target="_blank" href="https://www.figma.com/design/fZBkCMGoM4WavVNxHdHQRV/Fox-Area?node-id=7455-121444&t=yj0ExRLBvLIL2Doa-11">Figma ↗</a></figcaption></figure>
+              </div>
+            </li>
+            <li><b>Modify</b> - מאפשר שינוי כל פרמטרי הפקודה, בתנאי שביצועה טרם החל.
+              <div class="shots single">
+                <figure class="shot"><img src="images/orders-modify.png" alt="חלון Modify"><figcaption><span class="cap-text">חלון Modify</span><a class="figma-link" target="_blank" href="https://www.figma.com/design/fZBkCMGoM4WavVNxHdHQRV/Fox-Area?node-id=7457-91737&t=yj0ExRLBvLIL2Doa-11">Figma ↗</a></figcaption></figure>
+              </div>
+            </li>
+            <li><b>Cancel</b> - השחקן יוכל להגדיר שמעתה הפקודה תבוצע בלחיצה בודדת.
+              <div class="shots single">
+                <figure class="shot"><img src="images/orders-cancel.png" alt="חלון Cancel"><figcaption><span class="cap-text">חלון Cancel</span><a class="figma-link" target="_blank" href="https://www.figma.com/design/fZBkCMGoM4WavVNxHdHQRV/Fox-Area?node-id=7235-114892&t=yj0ExRLBvLIL2Doa-11">Figma ↗</a></figcaption></figure>
+              </div>
+            </li>
+          </ul>
+        </li>
+      </ul>
+      <ul class="feature-list lang-en">
+        <li>Swiping or tapping a pending order shows the player 3 options:
+          <ul>
+            <li><b>Flip</b> &mdash; the player can set this action to execute with a single tap going forward.
+              <div class="shots single">
+                <figure class="shot"><img src="images/orders-flip.png" alt="Flip window"><figcaption><span class="cap-text">Flip window</span><a class="figma-link" target="_blank" href="https://www.figma.com/design/fZBkCMGoM4WavVNxHdHQRV/Fox-Area?node-id=7455-121444&t=yj0ExRLBvLIL2Doa-11">Figma ↗</a></figcaption></figure>
+              </div>
+            </li>
+            <li><b>Modify</b> &mdash; allows changing all order parameters, as long as execution hasn't started.
+              <div class="shots single">
+                <figure class="shot"><img src="images/orders-modify.png" alt="Modify window"><figcaption><span class="cap-text">Modify window</span><a class="figma-link" target="_blank" href="https://www.figma.com/design/fZBkCMGoM4WavVNxHdHQRV/Fox-Area?node-id=7457-91737&t=yj0ExRLBvLIL2Doa-11">Figma ↗</a></figcaption></figure>
+              </div>
+            </li>
+            <li><b>Cancel</b> &mdash; the player can set this action to execute with a single tap going forward.
+              <div class="shots single">
+                <figure class="shot"><img src="images/orders-cancel.png" alt="Cancel window"><figcaption><span class="cap-text">Cancel window</span><a class="figma-link" target="_blank" href="https://www.figma.com/design/fZBkCMGoM4WavVNxHdHQRV/Fox-Area?node-id=7235-114892&t=yj0ExRLBvLIL2Doa-11">Figma ↗</a></figcaption></figure>
+              </div>
+            </li>
+          </ul>
+        </li>
+      </ul>
+
+      <p class="lang-he">הגדרת Single Click תיצור התראת in-app לשחקן, המסבירה שניתן לנהל את ההגדרה במקום הבא:</p>
+      <p class="lang-en">Enabling Single Click will create an in-app notification for the player, explaining that this setting can be managed here:</p>
+      <div class="shots single">
+        <figure class="shot"><img src="images/single-click-settings.png" alt="Trade Preferences"><figcaption><span class="cap-text lang-he">מסך ההגדרה</span><span class="cap-text lang-en">Settings screen</span><a class="figma-link" target="_blank" href="https://www.figma.com/design/fZBkCMGoM4WavVNxHdHQRV/Fox-Area?node-id=7457-94848&t=yj0ExRLBvLIL2Doa-11">Figma ↗</a></figcaption></figure>
+      </div>
+
+      <h4><span class="lang-he">נוטיפיקציה (In-App בלבד)</span><span class="lang-en">Notification (In-App only)</span></h4>
+      <div class="jira-card">
+        <div class="lang-he">
+          <b>NTF-PRO-012 - עדכון העדפות מסחר</b> (Instant Flip/Close/Cancel Confirmation)<br>
+          <b>כותרת בתוך האפליקציה:</b> "Trade preferences updated"<br>
+          <b>תוכן ההודעה:</b> "You changed Close and Flip actions to execute with one tap. You can update this anytime in Profile Settings &gt; Trade Preferences."<br>
+          <b>טריגר:</b> השחקן מסמן "Enable Instant Flip / Close / Cancel" במהלך טורניר חי. <b>ערוץ:</b> In-App בלבד (ללא Push/Email).
+        </div>
+        <div class="lang-en">
+          <b>NTF-PRO-012 &mdash; Trade Preferences Updated</b> (Instant Flip/Close/Cancel Confirmation)<br>
+          <b>In-app title:</b> "Trade preferences updated"<br>
+          <b>Body:</b> "You changed Close and Flip actions to execute with one tap. You can update this anytime in Profile Settings &gt; Trade Preferences."<br>
+          <b>Trigger:</b> player enables "Instant Flip / Close / Cancel" during a live tournament. <b>Channel:</b> In-App only (no Push/Email).
+        </div>
+        <div class="row">
+          <span class="jira-tag">DIVI-593</span>
+          <span class="jira-tag lang-he">עדיפות: High</span><span class="jira-tag lang-en">Priority: High</span>
+          <span class="jira-tag lang-he">סטטוס: Backlog</span><span class="jira-tag lang-en">Status: Backlog</span>
+          <a href="https://dividandy.atlassian.net/browse/DIVI-593" target="_blank"><span class="lang-he">פתח בג'ירה ↗</span><span class="lang-en">Open in Jira ↗</span></a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- UI -->
+  <section class="area" id="ui">
+    <h2><span class="lang-he">ממשק ו-UI</span><span class="lang-en">Interface &amp; UI</span></h2>
+
+    <div class="subsection" id="lobby">
+      <h3><span class="lang-he">אזור לובי</span><span class="lang-en">Lobby area</span></h3>
+      <ul class="feature-list lang-he">
+        <li>עודכן סידור המידע בכרטיסי הטורניר: היררכיית ההודעות וגדלי הטקסטים הותאמו לקריאות משופרת.</li>
+        <li>נוצר בידול חזותי ברור בין טורנירי Sit &amp; Go לבין טורנירים רגילים, כך שהשחקן יזהה מיידית את סוג הטורניר מתוך הלובי (תיוג צבעוני שונה, אייקון גביע, וטיימר ספירה לאחור בזמן אמת לעומת ספירת ימים).
+          <div class="shots">
+            <figure class="shot"><img src="images/lobby-live.png" alt="Live"><figcaption><span class="cap-text">Live</span><a class="figma-link" target="_blank" href="https://www.figma.com/design/fZBkCMGoM4WavVNxHdHQRV/Fox-Area?node-id=7187-25542&t=yj0ExRLBvLIL2Doa-11">Figma ↗</a></figcaption></figure>
+            <figure class="shot"><img src="images/lobby-my-zone.png" alt="My Zone"><figcaption><span class="cap-text">My Zone</span><a class="figma-link" target="_blank" href="https://www.figma.com/design/fZBkCMGoM4WavVNxHdHQRV/Fox-Area?node-id=7187-26040&t=yj0ExRLBvLIL2Doa-11">Figma ↗</a></figcaption></figure>
+            <figure class="shot"><img src="images/lobby-sit-go.jpg" alt="Sit & Go"><figcaption><span class="cap-text">Sit &amp; Go</span><a class="figma-link" target="_blank" href="https://www.figma.com/design/fZBkCMGoM4WavVNxHdHQRV/Fox-Area?node-id=7187-25303&t=yj0ExRLBvLIL2Doa-11">Figma ↗</a></figcaption></figure>
+            <figure class="shot"><img src="images/lobby-upcoming.png" alt="Upcoming"><figcaption><span class="cap-text">Upcoming</span><a class="figma-link" target="_blank" href="https://www.figma.com/design/fZBkCMGoM4WavVNxHdHQRV/Fox-Area?node-id=7187-25121&t=yj0ExRLBvLIL2Doa-11">Figma ↗</a></figcaption></figure>
+          </div>
+        </li>
+      </ul>
+      <ul class="feature-list lang-en">
+        <li>Updated the information layout on tournament cards: message hierarchy and text sizes were adjusted for improved readability.</li>
+        <li>Introduced a clear visual differentiation between Sit &amp; Go tournaments and standard tournaments, so players can immediately identify the tournament type from the lobby (different color tagging, a trophy icon, and a real-time countdown timer vs. a day-based countdown).
+          <div class="shots">
+            <figure class="shot"><img src="images/lobby-live.png" alt="Live"><figcaption><span class="cap-text">Live</span><a class="figma-link" target="_blank" href="https://www.figma.com/design/fZBkCMGoM4WavVNxHdHQRV/Fox-Area?node-id=7187-25542&t=yj0ExRLBvLIL2Doa-11">Figma ↗</a></figcaption></figure>
+            <figure class="shot"><img src="images/lobby-my-zone.png" alt="My Zone"><figcaption><span class="cap-text">My Zone</span><a class="figma-link" target="_blank" href="https://www.figma.com/design/fZBkCMGoM4WavVNxHdHQRV/Fox-Area?node-id=7187-26040&t=yj0ExRLBvLIL2Doa-11">Figma ↗</a></figcaption></figure>
+            <figure class="shot"><img src="images/lobby-sit-go.jpg" alt="Sit & Go"><figcaption><span class="cap-text">Sit &amp; Go</span><a class="figma-link" target="_blank" href="https://www.figma.com/design/fZBkCMGoM4WavVNxHdHQRV/Fox-Area?node-id=7187-25303&t=yj0ExRLBvLIL2Doa-11">Figma ↗</a></figcaption></figure>
+            <figure class="shot"><img src="images/lobby-upcoming.png" alt="Upcoming"><figcaption><span class="cap-text">Upcoming</span><a class="figma-link" target="_blank" href="https://www.figma.com/design/fZBkCMGoM4WavVNxHdHQRV/Fox-Area?node-id=7187-25121&t=yj0ExRLBvLIL2Doa-11">Figma ↗</a></figcaption></figure>
+          </div>
+        </li>
+      </ul>
+    </div>
+
+    <div class="subsection" id="arena">
+      <h3><span class="lang-he">מסך משחק (ארנה)</span><span class="lang-en">Game screen (arena)</span></h3>
+      <ul class="feature-list lang-he">
+        <li>פידבק כללי: כשהשחקן משתתף בו-זמנית במספר טורנירים, אין זיהוי פנימי למשחק הפעיל.
+          <ul>
+            <li><b>פתרון:</b> תמונת הנושא (theme) של הטורניר תופיע מעתה בראש כל מסך ארנה.
+              <div class="shots single">
+                <figure class="shot"><img src="images/arena-header.png" alt="ראש מסך ארנה"><figcaption><span class="cap-text">ראש מסך ארנה</span><a class="figma-link" target="_blank" href="https://www.figma.com/design/fZBkCMGoM4WavVNxHdHQRV/Fox-Area?node-id=7187-32722&t=yj0ExRLBvLIL2Doa-11">Figma ↗</a></figcaption></figure>
+              </div>
+            </li>
+          </ul>
+        </li>
+        <li>הטיימר הסופר לסיום הטורניר לא היה ברור מספיק.
+          <ul><li><b>פתרון:</b> הטיימר הוגדל; אם שם הטורניר ארוך מדי הוא ייחתך לאחר 24 תווים ויסתיים ב-"…".</li></ul>
+        </li>
+      </ul>
+      <ul class="feature-list lang-en">
+        <li>General feedback: when a player is in several tournaments at once, there's no internal indication of which game is currently active.
+          <ul>
+            <li><b>Solution:</b> the tournament's theme image will now appear at the top of every arena screen.
+              <div class="shots single">
+                <figure class="shot"><img src="images/arena-header.png" alt="Arena screen header"><figcaption><span class="cap-text">Arena screen header</span><a class="figma-link" target="_blank" href="https://www.figma.com/design/fZBkCMGoM4WavVNxHdHQRV/Fox-Area?node-id=7187-32722&t=yj0ExRLBvLIL2Doa-11">Figma ↗</a></figcaption></figure>
+              </div>
+            </li>
+          </ul>
+        </li>
+        <li>The countdown timer for the tournament's end was not clear enough.
+          <ul><li><b>Solution:</b> the timer was enlarged; if the tournament name is too long, it now truncates after 24 characters with "&hellip;".</li></ul>
+        </li>
+      </ul>
+    </div>
+  </section>
+
+  <!-- TECH -->
+  <section class="area" id="tech">
+    <h2><span class="lang-he">טכנולוגיה</span><span class="lang-en">Technology</span></h2>
+    <div class="placeholder"><span class="lang-he">ממתין לתוכן.</span><span class="lang-en">Awaiting content.</span></div>
+  </section>
+
+  <footer>Dividandy <span class="dot">·</span> <span class="lang-he">דוח פנימי</span><span class="lang-en">Internal report</span></footer>
+
+</div>
+
+<script>
+function setLang(lang) {
+  document.body.className = 'lang-' + lang;
+  document.documentElement.lang = lang;
+  document.documentElement.dir = lang === 'he' ? 'rtl' : 'ltr';
+  document.getElementById('btn-he').classList.toggle('active', lang === 'he');
+  document.getElementById('btn-en').classList.toggle('active', lang === 'en');
+}
+</script>
+</body>
+</html>
