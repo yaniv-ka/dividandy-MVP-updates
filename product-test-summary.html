@@ -183,10 +183,8 @@
     <div class="brand"><span class="dot"></span> Dividandy</div>
     <div class="nav-links">
       <a href="#intro"><span class="lang-he">מבוא</span><span class="lang-en">Intro</span></a>
-      <a href="#feedback"><span class="lang-he">פידבקים</span><span class="lang-en">Feedback</span></a>
+      <a href="#ui"><span class="lang-he">לובי / UI</span><span class="lang-en">Lobby / UI</span></a>
       <a href="#trade"><span class="lang-he">מסחר</span><span class="lang-en">Trade</span></a>
-      <a href="#ui"><span class="lang-he">UI</span><span class="lang-en">UI</span></a>
-      <a href="#tech"><span class="lang-he">טכנולוגיה</span><span class="lang-en">Tech</span></a>
     </div>
     <div class="lang-toggle">
       <button id="btn-he" class="active" onclick="setLang('he')">עברית</button>
@@ -212,20 +210,18 @@
     <h2><span class="lang-he">תוכן העניינים</span><span class="lang-en">Table of contents</span></h2>
     <ol>
       <li><a href="#intro"><span class="lang-he">מבוא</span><span class="lang-en">Introduction</span></a></li>
-      <li><a href="#feedback"><span class="lang-he">פידבקים כלליים שהתקבלו</span><span class="lang-en">General feedback received</span></a></li>
-      <li><a href="#trade"><span class="lang-he">חוויית מסחר ואזור טרייד</span><span class="lang-en">Trading experience &amp; trade area</span></a>
-        <ol>
-          <li><a href="#trade-area"><span class="lang-he">אזור טרייד</span><span class="lang-en">Trade area</span></a></li>
-          <li><a href="#portfolio"><span class="lang-he">ניהול פורטפוליו</span><span class="lang-en">Portfolio management</span></a></li>
-        </ol>
-      </li>
       <li><a href="#ui"><span class="lang-he">ממשק ו-UI</span><span class="lang-en">Interface &amp; UI</span></a>
         <ol>
           <li><a href="#lobby"><span class="lang-he">אזור לובי</span><span class="lang-en">Lobby area</span></a></li>
           <li><a href="#arena"><span class="lang-he">מסך משחק (ארנה)</span><span class="lang-en">Game screen (arena)</span></a></li>
         </ol>
       </li>
-      <li><a href="#tech"><span class="lang-he">טכנולוגיה</span><span class="lang-en">Technology</span></a></li>
+      <li><a href="#trade"><span class="lang-he">חוויית מסחר ואזור טרייד</span><span class="lang-en">Trading experience &amp; trade area</span></a>
+        <ol>
+          <li><a href="#trade-area"><span class="lang-he">אזור טרייד</span><span class="lang-en">Trade area</span></a></li>
+          <li><a href="#portfolio"><span class="lang-he">ניהול פורטפוליו</span><span class="lang-en">Portfolio management</span></a></li>
+        </ol>
+      </li>
     </ol>
   </nav>
 
@@ -246,10 +242,67 @@
     </ol>
   </section>
 
-  <!-- GENERAL FEEDBACK -->
-  <section class="area" id="feedback">
-    <h2><span class="lang-he">פידבקים כלליים שהתקבלו</span><span class="lang-en">General feedback received</span></h2>
-    <div class="placeholder"><span class="lang-he">ממתין לתוכן.</span><span class="lang-en">Awaiting content.</span></div>
+  <!-- UI -->
+  <section class="area" id="ui">
+    <h2><span class="lang-he">ממשק ו-UI</span><span class="lang-en">Interface &amp; UI</span></h2>
+
+    <div class="subsection" id="lobby">
+      <h3><span class="lang-he">אזור לובי</span><span class="lang-en">Lobby area</span></h3>
+      <ul class="feature-list lang-he">
+        <li>עודכן סידור המידע בכרטיסי הטורניר: היררכיית ההודעות וגדלי הטקסטים הותאמו לקריאות משופרת.</li>
+        <li>נוצר בידול חזותי ברור בין טורנירי Sit &amp; Go לבין טורנירים רגילים, כך שהשחקן יזהה מיידית את סוג הטורניר מתוך הלובי (תיוג צבעוני שונה, אייקון גביע, וטיימר ספירה לאחור בזמן אמת לעומת ספירת ימים).
+          <div class="shots">
+            <figure class="shot"><img src="images/lobby-live.png" alt="Live"><figcaption><span class="cap-text">Live</span><a class="figma-link" target="_blank" href="https://www.figma.com/design/fZBkCMGoM4WavVNxHdHQRV/Fox-Area?node-id=7187-25542&t=yj0ExRLBvLIL2Doa-11">Figma ↗</a></figcaption></figure>
+            <figure class="shot"><img src="images/lobby-my-zone.png" alt="My Zone"><figcaption><span class="cap-text">My Zone</span><a class="figma-link" target="_blank" href="https://www.figma.com/design/fZBkCMGoM4WavVNxHdHQRV/Fox-Area?node-id=7187-26040&t=yj0ExRLBvLIL2Doa-11">Figma ↗</a></figcaption></figure>
+            <figure class="shot"><img src="images/lobby-sit-go.jpg" alt="Sit & Go"><figcaption><span class="cap-text">Sit &amp; Go</span><a class="figma-link" target="_blank" href="https://www.figma.com/design/fZBkCMGoM4WavVNxHdHQRV/Fox-Area?node-id=7187-25303&t=yj0ExRLBvLIL2Doa-11">Figma ↗</a></figcaption></figure>
+            <figure class="shot"><img src="images/lobby-upcoming.png" alt="Upcoming"><figcaption><span class="cap-text">Upcoming</span><a class="figma-link" target="_blank" href="https://www.figma.com/design/fZBkCMGoM4WavVNxHdHQRV/Fox-Area?node-id=7187-25121&t=yj0ExRLBvLIL2Doa-11">Figma ↗</a></figcaption></figure>
+          </div>
+        </li>
+      </ul>
+      <ul class="feature-list lang-en">
+        <li>Updated the information layout on tournament cards: message hierarchy and text sizes were adjusted for improved readability.</li>
+        <li>Introduced a clear visual differentiation between Sit &amp; Go tournaments and standard tournaments, so players can immediately identify the tournament type from the lobby (different color tagging, a trophy icon, and a real-time countdown timer vs. a day-based countdown).
+          <div class="shots">
+            <figure class="shot"><img src="images/lobby-live.png" alt="Live"><figcaption><span class="cap-text">Live</span><a class="figma-link" target="_blank" href="https://www.figma.com/design/fZBkCMGoM4WavVNxHdHQRV/Fox-Area?node-id=7187-25542&t=yj0ExRLBvLIL2Doa-11">Figma ↗</a></figcaption></figure>
+            <figure class="shot"><img src="images/lobby-my-zone.png" alt="My Zone"><figcaption><span class="cap-text">My Zone</span><a class="figma-link" target="_blank" href="https://www.figma.com/design/fZBkCMGoM4WavVNxHdHQRV/Fox-Area?node-id=7187-26040&t=yj0ExRLBvLIL2Doa-11">Figma ↗</a></figcaption></figure>
+            <figure class="shot"><img src="images/lobby-sit-go.jpg" alt="Sit & Go"><figcaption><span class="cap-text">Sit &amp; Go</span><a class="figma-link" target="_blank" href="https://www.figma.com/design/fZBkCMGoM4WavVNxHdHQRV/Fox-Area?node-id=7187-25303&t=yj0ExRLBvLIL2Doa-11">Figma ↗</a></figcaption></figure>
+            <figure class="shot"><img src="images/lobby-upcoming.png" alt="Upcoming"><figcaption><span class="cap-text">Upcoming</span><a class="figma-link" target="_blank" href="https://www.figma.com/design/fZBkCMGoM4WavVNxHdHQRV/Fox-Area?node-id=7187-25121&t=yj0ExRLBvLIL2Doa-11">Figma ↗</a></figcaption></figure>
+          </div>
+        </li>
+      </ul>
+    </div>
+
+    <div class="subsection" id="arena">
+      <h3><span class="lang-he">מסך משחק (ארנה)</span><span class="lang-en">Game screen (arena)</span></h3>
+      <ul class="feature-list lang-he">
+        <li>פידבק כללי: כשהשחקן משתתף בו-זמנית במספר טורנירים, אין זיהוי פנימי למשחק הפעיל.
+          <ul>
+            <li><b>פתרון:</b> תמונת הנושא (theme) של הטורניר תופיע מעתה בראש כל מסך ארנה.
+              <div class="shots single">
+                <figure class="shot"><img src="images/arena-header.png" alt="ראש מסך ארנה"><figcaption><span class="cap-text">ראש מסך ארנה</span><a class="figma-link" target="_blank" href="https://www.figma.com/design/fZBkCMGoM4WavVNxHdHQRV/Fox-Area?node-id=7187-32722&t=yj0ExRLBvLIL2Doa-11">Figma ↗</a></figcaption></figure>
+              </div>
+            </li>
+          </ul>
+        </li>
+        <li>הטיימר הסופר לסיום הטורניר לא היה ברור מספיק.
+          <ul><li><b>פתרון:</b> הטיימר הוגדל; אם שם הטורניר ארוך מדי הוא ייחתך לאחר 24 תווים ויסתיים ב-"…".</li></ul>
+        </li>
+      </ul>
+      <ul class="feature-list lang-en">
+        <li>General feedback: when a player is in several tournaments at once, there's no internal indication of which game is currently active.
+          <ul>
+            <li><b>Solution:</b> the tournament's theme image will now appear at the top of every arena screen.
+              <div class="shots single">
+                <figure class="shot"><img src="images/arena-header.png" alt="Arena screen header"><figcaption><span class="cap-text">Arena screen header</span><a class="figma-link" target="_blank" href="https://www.figma.com/design/fZBkCMGoM4WavVNxHdHQRV/Fox-Area?node-id=7187-32722&t=yj0ExRLBvLIL2Doa-11">Figma ↗</a></figcaption></figure>
+              </div>
+            </li>
+          </ul>
+        </li>
+        <li>The countdown timer for the tournament's end was not clear enough.
+          <ul><li><b>Solution:</b> the timer was enlarged; if the tournament name is too long, it now truncates after 24 characters with "&hellip;".</li></ul>
+        </li>
+      </ul>
+    </div>
   </section>
 
   <!-- TRADE -->
@@ -489,75 +542,6 @@
         </div>
       </div>
     </div>
-  </section>
-
-  <!-- UI -->
-  <section class="area" id="ui">
-    <h2><span class="lang-he">ממשק ו-UI</span><span class="lang-en">Interface &amp; UI</span></h2>
-
-    <div class="subsection" id="lobby">
-      <h3><span class="lang-he">אזור לובי</span><span class="lang-en">Lobby area</span></h3>
-      <ul class="feature-list lang-he">
-        <li>עודכן סידור המידע בכרטיסי הטורניר: היררכיית ההודעות וגדלי הטקסטים הותאמו לקריאות משופרת.</li>
-        <li>נוצר בידול חזותי ברור בין טורנירי Sit &amp; Go לבין טורנירים רגילים, כך שהשחקן יזהה מיידית את סוג הטורניר מתוך הלובי (תיוג צבעוני שונה, אייקון גביע, וטיימר ספירה לאחור בזמן אמת לעומת ספירת ימים).
-          <div class="shots">
-            <figure class="shot"><img src="images/lobby-live.png" alt="Live"><figcaption><span class="cap-text">Live</span><a class="figma-link" target="_blank" href="https://www.figma.com/design/fZBkCMGoM4WavVNxHdHQRV/Fox-Area?node-id=7187-25542&t=yj0ExRLBvLIL2Doa-11">Figma ↗</a></figcaption></figure>
-            <figure class="shot"><img src="images/lobby-my-zone.png" alt="My Zone"><figcaption><span class="cap-text">My Zone</span><a class="figma-link" target="_blank" href="https://www.figma.com/design/fZBkCMGoM4WavVNxHdHQRV/Fox-Area?node-id=7187-26040&t=yj0ExRLBvLIL2Doa-11">Figma ↗</a></figcaption></figure>
-            <figure class="shot"><img src="images/lobby-sit-go.jpg" alt="Sit & Go"><figcaption><span class="cap-text">Sit &amp; Go</span><a class="figma-link" target="_blank" href="https://www.figma.com/design/fZBkCMGoM4WavVNxHdHQRV/Fox-Area?node-id=7187-25303&t=yj0ExRLBvLIL2Doa-11">Figma ↗</a></figcaption></figure>
-            <figure class="shot"><img src="images/lobby-upcoming.png" alt="Upcoming"><figcaption><span class="cap-text">Upcoming</span><a class="figma-link" target="_blank" href="https://www.figma.com/design/fZBkCMGoM4WavVNxHdHQRV/Fox-Area?node-id=7187-25121&t=yj0ExRLBvLIL2Doa-11">Figma ↗</a></figcaption></figure>
-          </div>
-        </li>
-      </ul>
-      <ul class="feature-list lang-en">
-        <li>Updated the information layout on tournament cards: message hierarchy and text sizes were adjusted for improved readability.</li>
-        <li>Introduced a clear visual differentiation between Sit &amp; Go tournaments and standard tournaments, so players can immediately identify the tournament type from the lobby (different color tagging, a trophy icon, and a real-time countdown timer vs. a day-based countdown).
-          <div class="shots">
-            <figure class="shot"><img src="images/lobby-live.png" alt="Live"><figcaption><span class="cap-text">Live</span><a class="figma-link" target="_blank" href="https://www.figma.com/design/fZBkCMGoM4WavVNxHdHQRV/Fox-Area?node-id=7187-25542&t=yj0ExRLBvLIL2Doa-11">Figma ↗</a></figcaption></figure>
-            <figure class="shot"><img src="images/lobby-my-zone.png" alt="My Zone"><figcaption><span class="cap-text">My Zone</span><a class="figma-link" target="_blank" href="https://www.figma.com/design/fZBkCMGoM4WavVNxHdHQRV/Fox-Area?node-id=7187-26040&t=yj0ExRLBvLIL2Doa-11">Figma ↗</a></figcaption></figure>
-            <figure class="shot"><img src="images/lobby-sit-go.jpg" alt="Sit & Go"><figcaption><span class="cap-text">Sit &amp; Go</span><a class="figma-link" target="_blank" href="https://www.figma.com/design/fZBkCMGoM4WavVNxHdHQRV/Fox-Area?node-id=7187-25303&t=yj0ExRLBvLIL2Doa-11">Figma ↗</a></figcaption></figure>
-            <figure class="shot"><img src="images/lobby-upcoming.png" alt="Upcoming"><figcaption><span class="cap-text">Upcoming</span><a class="figma-link" target="_blank" href="https://www.figma.com/design/fZBkCMGoM4WavVNxHdHQRV/Fox-Area?node-id=7187-25121&t=yj0ExRLBvLIL2Doa-11">Figma ↗</a></figcaption></figure>
-          </div>
-        </li>
-      </ul>
-    </div>
-
-    <div class="subsection" id="arena">
-      <h3><span class="lang-he">מסך משחק (ארנה)</span><span class="lang-en">Game screen (arena)</span></h3>
-      <ul class="feature-list lang-he">
-        <li>פידבק כללי: כשהשחקן משתתף בו-זמנית במספר טורנירים, אין זיהוי פנימי למשחק הפעיל.
-          <ul>
-            <li><b>פתרון:</b> תמונת הנושא (theme) של הטורניר תופיע מעתה בראש כל מסך ארנה.
-              <div class="shots single">
-                <figure class="shot"><img src="images/arena-header.png" alt="ראש מסך ארנה"><figcaption><span class="cap-text">ראש מסך ארנה</span><a class="figma-link" target="_blank" href="https://www.figma.com/design/fZBkCMGoM4WavVNxHdHQRV/Fox-Area?node-id=7187-32722&t=yj0ExRLBvLIL2Doa-11">Figma ↗</a></figcaption></figure>
-              </div>
-            </li>
-          </ul>
-        </li>
-        <li>הטיימר הסופר לסיום הטורניר לא היה ברור מספיק.
-          <ul><li><b>פתרון:</b> הטיימר הוגדל; אם שם הטורניר ארוך מדי הוא ייחתך לאחר 24 תווים ויסתיים ב-"…".</li></ul>
-        </li>
-      </ul>
-      <ul class="feature-list lang-en">
-        <li>General feedback: when a player is in several tournaments at once, there's no internal indication of which game is currently active.
-          <ul>
-            <li><b>Solution:</b> the tournament's theme image will now appear at the top of every arena screen.
-              <div class="shots single">
-                <figure class="shot"><img src="images/arena-header.png" alt="Arena screen header"><figcaption><span class="cap-text">Arena screen header</span><a class="figma-link" target="_blank" href="https://www.figma.com/design/fZBkCMGoM4WavVNxHdHQRV/Fox-Area?node-id=7187-32722&t=yj0ExRLBvLIL2Doa-11">Figma ↗</a></figcaption></figure>
-              </div>
-            </li>
-          </ul>
-        </li>
-        <li>The countdown timer for the tournament's end was not clear enough.
-          <ul><li><b>Solution:</b> the timer was enlarged; if the tournament name is too long, it now truncates after 24 characters with "&hellip;".</li></ul>
-        </li>
-      </ul>
-    </div>
-  </section>
-
-  <!-- TECH -->
-  <section class="area" id="tech">
-    <h2><span class="lang-he">טכנולוגיה</span><span class="lang-en">Technology</span></h2>
-    <div class="placeholder"><span class="lang-he">ממתין לתוכן.</span><span class="lang-en">Awaiting content.</span></div>
   </section>
 
   <footer>Dividandy <span class="dot">·</span> <span class="lang-he">דוח פנימי</span><span class="lang-en">Internal report</span></footer>
