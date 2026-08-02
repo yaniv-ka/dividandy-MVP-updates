@@ -118,16 +118,24 @@
   }
   .placeholder .owner { font-weight: 800; color: var(--text); }
 
-  /* screenshot gallery */
-  .shots { display: grid; grid-template-columns: repeat(auto-fill, minmax(140px, 1fr)); gap: 16px; margin: 12px 0 18px; }
-  .shots.single { grid-template-columns: minmax(140px, 220px); }
-  figure.shot { margin: 0; background: var(--card-2); border: 1px solid var(--border); border-radius: 14px; padding: 10px; text-align: center; }
+  /* screenshot gallery — always shown at native pixel size, scrolls horizontally rather than shrinking */
+  .shots {
+    display: flex; flex-wrap: nowrap; overflow-x: auto; gap: 16px; margin: 12px 0 18px;
+    padding-bottom: 10px; -webkit-overflow-scrolling: touch; scroll-snap-type: x proximity;
+  }
+  .shots::-webkit-scrollbar { height: 8px; }
+  .shots::-webkit-scrollbar-thumb { background: var(--border); border-radius: 4px; }
+  .shots.single { flex-wrap: wrap; }
+  figure.shot {
+    margin: 0; background: var(--card-2); border: 1px solid var(--border); border-radius: 14px; padding: 10px;
+    text-align: center; flex: 0 0 auto; scroll-snap-align: start;
+  }
   figure.shot img {
-    width: 100%; border-radius: 10px; border: 1px solid rgba(255,255,255,0.06); display: block; margin-bottom: 8px;
-    cursor: zoom-in; transition: opacity 0.15s;
+    width: auto; max-width: none; height: auto; border-radius: 10px; border: 1px solid rgba(255,255,255,0.06);
+    display: block; margin-bottom: 8px; cursor: zoom-in; transition: opacity 0.15s;
   }
   figure.shot img:hover { opacity: 0.85; }
-  figure.shot figcaption { font-size: 11.5px; color: var(--muted); line-height: 1.5; }
+  figure.shot figcaption { font-size: 11.5px; color: var(--muted); line-height: 1.5; max-width: 260px; margin: 0 auto; }
   figure.shot figcaption .cap-text { display: block; margin-bottom: 4px; color: var(--text); }
   a.figma-link {
     display: inline-flex; align-items: center; gap: 4px; font-size: 11px; color: var(--accent);
@@ -188,18 +196,15 @@
     .toc { padding: 16px 18px; }
     .stakeholders { gap: 8px; }
     .stakeholder-chip { font-size: 11.5px; padding: 6px 12px; }
-    .shots { grid-template-columns: repeat(auto-fill, minmax(110px, 1fr)); gap: 10px; }
-    .shots.single { grid-template-columns: minmax(110px, 45vw); }
+    .shots { gap: 10px; }
     figure.shot figcaption { font-size: 11px; }
     .jira-card { padding: 14px 16px; font-size: 13px; }
     .jira-card .row { gap: 6px; }
   }
   @media (max-width: 420px) {
     header.doc-header h1 { font-size: 20px; }
-    .shots { grid-template-columns: repeat(auto-fill, minmax(95px, 1fr)); }
     .nav-links a { font-size: 11px; padding: 6px 10px; }
   }
-  img { max-width: 100%; height: auto; }
   table { max-width: 100%; }
 </style>
 </head>
@@ -271,8 +276,8 @@
 
   <div style="text-align:center;">
     <span class="zoom-hint">
-      <span class="lang-he">🔍 <b>לחיצה על כל תמונה</b> תציג אותה בגודל המקורי המלא</span>
-      <span class="lang-en">🔍 <b>Click any screenshot</b> to view it at its full original size</span>
+      <span class="lang-he">🔍 כל התמונות מוצגות בגודלן האמיתי (ללא הקטנה) - גללו אופקית בתוך הגלריה, ולחיצה על תמונה תציג אותה לבד על מסך מלא</span>
+      <span class="lang-en">🔍 All screenshots are shown at their true size (never shrunk) - scroll the gallery sideways, and tap any image to view it alone in full screen</span>
     </span>
   </div>
 
@@ -286,10 +291,10 @@
         <li>עודכן סידור המידע בכרטיסי הטורניר: היררכיית ההודעות וגדלי הטקסטים הותאמו לקריאות משופרת.</li>
         <li>נוצר בידול חזותי ברור בין טורנירי Sit &amp; Go לבין טורנירים רגילים, כך שהשחקן יזהה מיידית את סוג הטורניר מתוך הלובי (תיוג צבעוני שונה, אייקון גביע, וטיימר ספירה לאחור בזמן אמת לעומת ספירת ימים).
           <div class="shots">
-            <figure class="shot"><img src="images/lobby-live.png?v=4" alt="Live"><figcaption><span class="cap-text">Live</span><a class="figma-link" target="_blank" href="https://www.figma.com/design/fZBkCMGoM4WavVNxHdHQRV/Fox-Area?node-id=7187-25542&t=yj0ExRLBvLIL2Doa-11">Figma ↗</a></figcaption></figure>
-            <figure class="shot"><img src="images/lobby-my-zone.png?v=4" alt="My Zone"><figcaption><span class="cap-text">My Zone</span><a class="figma-link" target="_blank" href="https://www.figma.com/design/fZBkCMGoM4WavVNxHdHQRV/Fox-Area?node-id=7187-26040&t=yj0ExRLBvLIL2Doa-11">Figma ↗</a></figcaption></figure>
-            <figure class="shot"><img src="images/lobby-sit-go.png?v=4" alt="Sit & Go"><figcaption><span class="cap-text">Sit &amp; Go</span><a class="figma-link" target="_blank" href="https://www.figma.com/design/fZBkCMGoM4WavVNxHdHQRV/Fox-Area?node-id=7187-25303&t=yj0ExRLBvLIL2Doa-11">Figma ↗</a></figcaption></figure>
-            <figure class="shot"><img src="images/lobby-upcoming.png?v=4" alt="Upcoming"><figcaption><span class="cap-text">Upcoming</span><a class="figma-link" target="_blank" href="https://www.figma.com/design/fZBkCMGoM4WavVNxHdHQRV/Fox-Area?node-id=7187-25121&t=yj0ExRLBvLIL2Doa-11">Figma ↗</a></figcaption></figure>
+            <figure class="shot"><img src="images/lobby-live.png?v=5" alt="Live"><figcaption><span class="cap-text">Live</span><a class="figma-link" target="_blank" href="https://www.figma.com/design/fZBkCMGoM4WavVNxHdHQRV/Fox-Area?node-id=7187-25542&t=yj0ExRLBvLIL2Doa-11">Figma ↗</a></figcaption></figure>
+            <figure class="shot"><img src="images/lobby-my-zone.png?v=5" alt="My Zone"><figcaption><span class="cap-text">My Zone</span><a class="figma-link" target="_blank" href="https://www.figma.com/design/fZBkCMGoM4WavVNxHdHQRV/Fox-Area?node-id=7187-26040&t=yj0ExRLBvLIL2Doa-11">Figma ↗</a></figcaption></figure>
+            <figure class="shot"><img src="images/lobby-sit-go.png?v=5" alt="Sit & Go"><figcaption><span class="cap-text">Sit &amp; Go</span><a class="figma-link" target="_blank" href="https://www.figma.com/design/fZBkCMGoM4WavVNxHdHQRV/Fox-Area?node-id=7187-25303&t=yj0ExRLBvLIL2Doa-11">Figma ↗</a></figcaption></figure>
+            <figure class="shot"><img src="images/lobby-upcoming.png?v=5" alt="Upcoming"><figcaption><span class="cap-text">Upcoming</span><a class="figma-link" target="_blank" href="https://www.figma.com/design/fZBkCMGoM4WavVNxHdHQRV/Fox-Area?node-id=7187-25121&t=yj0ExRLBvLIL2Doa-11">Figma ↗</a></figcaption></figure>
           </div>
         </li>
       </ul>
@@ -297,10 +302,10 @@
         <li>Updated the information layout on tournament cards: message hierarchy and text sizes were adjusted for improved readability.</li>
         <li>Introduced a clear visual differentiation between Sit &amp; Go tournaments and standard tournaments, so players can immediately identify the tournament type from the lobby (different color tagging, a trophy icon, and a real-time countdown timer vs. a day-based countdown).
           <div class="shots">
-            <figure class="shot"><img src="images/lobby-live.png?v=4" alt="Live"><figcaption><span class="cap-text">Live</span><a class="figma-link" target="_blank" href="https://www.figma.com/design/fZBkCMGoM4WavVNxHdHQRV/Fox-Area?node-id=7187-25542&t=yj0ExRLBvLIL2Doa-11">Figma ↗</a></figcaption></figure>
-            <figure class="shot"><img src="images/lobby-my-zone.png?v=4" alt="My Zone"><figcaption><span class="cap-text">My Zone</span><a class="figma-link" target="_blank" href="https://www.figma.com/design/fZBkCMGoM4WavVNxHdHQRV/Fox-Area?node-id=7187-26040&t=yj0ExRLBvLIL2Doa-11">Figma ↗</a></figcaption></figure>
-            <figure class="shot"><img src="images/lobby-sit-go.png?v=4" alt="Sit & Go"><figcaption><span class="cap-text">Sit &amp; Go</span><a class="figma-link" target="_blank" href="https://www.figma.com/design/fZBkCMGoM4WavVNxHdHQRV/Fox-Area?node-id=7187-25303&t=yj0ExRLBvLIL2Doa-11">Figma ↗</a></figcaption></figure>
-            <figure class="shot"><img src="images/lobby-upcoming.png?v=4" alt="Upcoming"><figcaption><span class="cap-text">Upcoming</span><a class="figma-link" target="_blank" href="https://www.figma.com/design/fZBkCMGoM4WavVNxHdHQRV/Fox-Area?node-id=7187-25121&t=yj0ExRLBvLIL2Doa-11">Figma ↗</a></figcaption></figure>
+            <figure class="shot"><img src="images/lobby-live.png?v=5" alt="Live"><figcaption><span class="cap-text">Live</span><a class="figma-link" target="_blank" href="https://www.figma.com/design/fZBkCMGoM4WavVNxHdHQRV/Fox-Area?node-id=7187-25542&t=yj0ExRLBvLIL2Doa-11">Figma ↗</a></figcaption></figure>
+            <figure class="shot"><img src="images/lobby-my-zone.png?v=5" alt="My Zone"><figcaption><span class="cap-text">My Zone</span><a class="figma-link" target="_blank" href="https://www.figma.com/design/fZBkCMGoM4WavVNxHdHQRV/Fox-Area?node-id=7187-26040&t=yj0ExRLBvLIL2Doa-11">Figma ↗</a></figcaption></figure>
+            <figure class="shot"><img src="images/lobby-sit-go.png?v=5" alt="Sit & Go"><figcaption><span class="cap-text">Sit &amp; Go</span><a class="figma-link" target="_blank" href="https://www.figma.com/design/fZBkCMGoM4WavVNxHdHQRV/Fox-Area?node-id=7187-25303&t=yj0ExRLBvLIL2Doa-11">Figma ↗</a></figcaption></figure>
+            <figure class="shot"><img src="images/lobby-upcoming.png?v=5" alt="Upcoming"><figcaption><span class="cap-text">Upcoming</span><a class="figma-link" target="_blank" href="https://www.figma.com/design/fZBkCMGoM4WavVNxHdHQRV/Fox-Area?node-id=7187-25121&t=yj0ExRLBvLIL2Doa-11">Figma ↗</a></figcaption></figure>
           </div>
         </li>
       </ul>
@@ -313,7 +318,7 @@
           <ul>
             <li><b>פתרון:</b> תמונת הנושא (theme) של הטורניר תופיע מעתה בראש כל מסך ארנה.
               <div class="shots single">
-                <figure class="shot"><img src="images/arena-header.png?v=4" alt="ראש מסך ארנה"><figcaption><span class="cap-text">ראש מסך ארנה</span><a class="figma-link" target="_blank" href="https://www.figma.com/design/fZBkCMGoM4WavVNxHdHQRV/Fox-Area?node-id=7187-32722&t=yj0ExRLBvLIL2Doa-11">Figma ↗</a></figcaption></figure>
+                <figure class="shot"><img src="images/arena-header.png?v=5" alt="ראש מסך ארנה"><figcaption><span class="cap-text">ראש מסך ארנה</span><a class="figma-link" target="_blank" href="https://www.figma.com/design/fZBkCMGoM4WavVNxHdHQRV/Fox-Area?node-id=7187-32722&t=yj0ExRLBvLIL2Doa-11">Figma ↗</a></figcaption></figure>
               </div>
             </li>
           </ul>
@@ -327,7 +332,7 @@
           <ul>
             <li><b>Solution:</b> the tournament's theme image will now appear at the top of every arena screen.
               <div class="shots single">
-                <figure class="shot"><img src="images/arena-header.png?v=4" alt="Arena screen header"><figcaption><span class="cap-text">Arena screen header</span><a class="figma-link" target="_blank" href="https://www.figma.com/design/fZBkCMGoM4WavVNxHdHQRV/Fox-Area?node-id=7187-32722&t=yj0ExRLBvLIL2Doa-11">Figma ↗</a></figcaption></figure>
+                <figure class="shot"><img src="images/arena-header.png?v=5" alt="Arena screen header"><figcaption><span class="cap-text">Arena screen header</span><a class="figma-link" target="_blank" href="https://www.figma.com/design/fZBkCMGoM4WavVNxHdHQRV/Fox-Area?node-id=7187-32722&t=yj0ExRLBvLIL2Doa-11">Figma ↗</a></figcaption></figure>
               </div>
             </li>
           </ul>
@@ -352,7 +357,7 @@
       <ul class="feature-list lang-he">
         <li>מנגנון המסחר עוצב מחדש: השחקן אינו עוזב יותר את הארנה למסך נפרד בלחיצה על "טרייד" - כל תהליך המסחר מתבצע כעת בחלונות מגירה צפים (floating drawers), כך שהשחקן נשאר תמיד בתוך הארנה.
           <div class="shots single">
-            <figure class="shot"><img src="images/trade-category.png?v=4" alt="מסך קטגוריה"><figcaption><span class="cap-text">מסך קטגוריה</span><a class="figma-link" target="_blank" href="https://www.figma.com/design/fZBkCMGoM4WavVNxHdHQRV/Fox-Area?node-id=7455-91258&t=yj0ExRLBvLIL2Doa-11">Figma ↗</a></figcaption></figure>
+            <figure class="shot"><img src="images/trade-category.png?v=5" alt="מסך קטגוריה"><figcaption><span class="cap-text">מסך קטגוריה</span><a class="figma-link" target="_blank" href="https://www.figma.com/design/fZBkCMGoM4WavVNxHdHQRV/Fox-Area?node-id=7455-91258&t=yj0ExRLBvLIL2Doa-11">Figma ↗</a></figcaption></figure>
           </div>
         </li>
         <li>בראש החלון מוצגת רשימת קטגוריות המסחר:
@@ -360,7 +365,7 @@
             <li>הרשימה מציגה כעת תמיד את שם הנכס ואת הסימבול שלו.</li>
             <li>נשמרה האפשרות לגרור נכס שמאלה לביצוע עסקה מהירה.
               <div class="shots single">
-                <figure class="shot"><img src="images/trade-quick-swipe.png?v=4" alt="גרירה לעסקה מהירה"><figcaption><span class="cap-text">גרירה לעסקה מהירה</span><a class="figma-link" target="_blank" href="https://www.figma.com/design/fZBkCMGoM4WavVNxHdHQRV/Fox-Area?node-id=7455-96497&t=yj0ExRLBvLIL2Doa-11">Figma ↗</a></figcaption></figure>
+                <figure class="shot"><img src="images/trade-quick-swipe.png?v=5" alt="גרירה לעסקה מהירה"><figcaption><span class="cap-text">גרירה לעסקה מהירה</span><a class="figma-link" target="_blank" href="https://www.figma.com/design/fZBkCMGoM4WavVNxHdHQRV/Fox-Area?node-id=7455-96497&t=yj0ExRLBvLIL2Doa-11">Figma ↗</a></figcaption></figure>
               </div>
             </li>
           </ul>
@@ -368,26 +373,27 @@
         <li>מתחת לרשימת הקטגוריות נמצא חלון חיפוש, ומתחתיו סינוני קטגוריות: ABC, שווי שוק, הכי עולות/יורדות - עם אפשרות מיון עולה/יורד.</li>
         <li>מתחת לרשימת הנכסים נמצאים כעת 3 כפתורים:
           <div class="shots">
-            <figure class="shot"><img src="images/trade-watchlist.png?v=4" alt="Watchlist"><figcaption><span class="cap-text"><b>Watchlist</b> - פותח את חלון הנכסים השמורים כשכבה נוספת</span><a class="figma-link" target="_blank" href="https://www.figma.com/design/fZBkCMGoM4WavVNxHdHQRV/Fox-Area?node-id=7455-98774&t=yj0ExRLBvLIL2Doa-11">Figma ↗</a></figcaption></figure>
-            <figure class="shot"><img src="images/trade-dd-chat.png?v=4" alt="DD Chat"><figcaption><span class="cap-text"><b>DD Chat</b> - פותח את חלון הצ׳אט כשכבה נוספת</span><a class="figma-link" target="_blank" href="https://www.figma.com/design/fZBkCMGoM4WavVNxHdHQRV/Fox-Area?node-id=7455-105310&t=yj0ExRLBvLIL2Doa-11">Figma ↗</a></figcaption></figure>
-            <figure class="shot"><img src="images/trade-market-info.png?v=4" alt="Market Info"><figcaption><span class="cap-text"><b>Market Info</b> - פותח את חלון המידע כשכבה נוספת</span><a class="figma-link" target="_blank" href="https://www.figma.com/design/fZBkCMGoM4WavVNxHdHQRV/Fox-Area?node-id=7455-101920&t=yj0ExRLBvLIL2Doa-11">Figma ↗</a></figcaption></figure>
+            <figure class="shot"><img src="images/trade-watchlist.png?v=5" alt="Watchlist"><figcaption><span class="cap-text"><b>Watchlist</b> - פותח את חלון הנכסים השמורים כשכבה נוספת</span><a class="figma-link" target="_blank" href="https://www.figma.com/design/fZBkCMGoM4WavVNxHdHQRV/Fox-Area?node-id=7455-98774&t=yj0ExRLBvLIL2Doa-11">Figma ↗</a></figcaption></figure>
+            <figure class="shot"><img src="images/trade-dd-chat.png?v=5" alt="DD Chat"><figcaption><span class="cap-text"><b>DD Chat</b> - פותח את חלון הצ׳אט כשכבה נוספת</span><a class="figma-link" target="_blank" href="https://www.figma.com/design/fZBkCMGoM4WavVNxHdHQRV/Fox-Area?node-id=7455-105310&t=yj0ExRLBvLIL2Doa-11">Figma ↗</a></figcaption></figure>
+            <figure class="shot"><img src="images/trade-market-info.png?v=5" alt="Market Info"><figcaption><span class="cap-text"><b>Market Info</b> - פותח את חלון המידע כשכבה נוספת</span><a class="figma-link" target="_blank" href="https://www.figma.com/design/fZBkCMGoM4WavVNxHdHQRV/Fox-Area?node-id=7455-101920&t=yj0ExRLBvLIL2Doa-11">Figma ↗</a></figcaption></figure>
           </div>
         </li>
+        <li><b>Watchlist:</b> רשימה גלובלית של נכסים שהמשתמש סימן, פר-משתמש וכוללת את כל הנכסים מכל הקטגוריות בכל הטורנירים שבהם השתתף. בכל טורניר בודד יוצגו מתוך הרשימה הזו רק הנכסים הרלוונטיים לאותו טורניר.</li>
         <li><b>מסך נכס:</b> פידבק - יותר מדי פרטים לא רלוונטיים לחוויית המסחר; יש לפשט את התפעול. אזור "People also show interest in these stocks" הוסר.
           <div class="shots single">
-            <figure class="shot"><img src="images/trade-asset-screen.png?v=4" alt="מסך נכס"><figcaption><span class="cap-text">מסך נכס</span><a class="figma-link" target="_blank" href="https://www.figma.com/design/fZBkCMGoM4WavVNxHdHQRV/Fox-Area?node-id=7455-93775&t=yj0ExRLBvLIL2Doa-11">Figma ↗</a></figcaption></figure>
+            <figure class="shot"><img src="images/trade-asset-screen.png?v=5" alt="מסך נכס"><figcaption><span class="cap-text">מסך נכס</span><a class="figma-link" target="_blank" href="https://www.figma.com/design/fZBkCMGoM4WavVNxHdHQRV/Fox-Area?node-id=7455-93775&t=yj0ExRLBvLIL2Doa-11">Figma ↗</a></figcaption></figure>
           </div>
         </li>
         <li>מסך <b>Execute Buy</b> ממוקם כעת בחלון מגירה צף, עם אפשרות חדשה להוספה ל-Watchlist.
           <div class="shots single">
-            <figure class="shot"><img src="images/trade-quick-swipe.png?v=4" alt="Execute Buy"><figcaption><span class="cap-text">Execute Buy</span><a class="figma-link" target="_blank" href="https://www.figma.com/design/fZBkCMGoM4WavVNxHdHQRV/Fox-Area?node-id=7455-96497&t=yj0ExRLBvLIL2Doa-11">Figma ↗</a></figcaption></figure>
+            <figure class="shot"><img src="images/trade-quick-swipe.png?v=5" alt="Execute Buy"><figcaption><span class="cap-text">Execute Buy</span><a class="figma-link" target="_blank" href="https://www.figma.com/design/fZBkCMGoM4WavVNxHdHQRV/Fox-Area?node-id=7455-96497&t=yj0ExRLBvLIL2Doa-11">Figma ↗</a></figcaption></figure>
           </div>
         </li>
       </ul>
       <ul class="feature-list lang-en">
         <li>The trading mechanism was redesigned: the player no longer leaves the arena for a separate screen when tapping "Trade" &mdash; the entire trading flow now happens in floating drawer windows, so the player always stays inside the arena.
           <div class="shots single">
-            <figure class="shot"><img src="images/trade-category.png?v=4" alt="Category screen"><figcaption><span class="cap-text">Category screen</span><a class="figma-link" target="_blank" href="https://www.figma.com/design/fZBkCMGoM4WavVNxHdHQRV/Fox-Area?node-id=7455-91258&t=yj0ExRLBvLIL2Doa-11">Figma ↗</a></figcaption></figure>
+            <figure class="shot"><img src="images/trade-category.png?v=5" alt="Category screen"><figcaption><span class="cap-text">Category screen</span><a class="figma-link" target="_blank" href="https://www.figma.com/design/fZBkCMGoM4WavVNxHdHQRV/Fox-Area?node-id=7455-91258&t=yj0ExRLBvLIL2Doa-11">Figma ↗</a></figcaption></figure>
           </div>
         </li>
         <li>The trade category list appears at the top of the window:
@@ -395,7 +401,7 @@
             <li>The list now always shows the asset name and its symbol.</li>
             <li>The ability to swipe an asset left for a quick trade was kept.
               <div class="shots single">
-                <figure class="shot"><img src="images/trade-quick-swipe.png?v=4" alt="Swipe for quick trade"><figcaption><span class="cap-text">Swipe for quick trade</span><a class="figma-link" target="_blank" href="https://www.figma.com/design/fZBkCMGoM4WavVNxHdHQRV/Fox-Area?node-id=7455-96497&t=yj0ExRLBvLIL2Doa-11">Figma ↗</a></figcaption></figure>
+                <figure class="shot"><img src="images/trade-quick-swipe.png?v=5" alt="Swipe for quick trade"><figcaption><span class="cap-text">Swipe for quick trade</span><a class="figma-link" target="_blank" href="https://www.figma.com/design/fZBkCMGoM4WavVNxHdHQRV/Fox-Area?node-id=7455-96497&t=yj0ExRLBvLIL2Doa-11">Figma ↗</a></figcaption></figure>
               </div>
             </li>
           </ul>
@@ -403,19 +409,20 @@
         <li>Below the category list is a search box, and below that, category filters: ABC, market cap, top gainers/losers &mdash; with ascending/descending sort.</li>
         <li>Below the asset list there are now 3 buttons:
           <div class="shots">
-            <figure class="shot"><img src="images/trade-watchlist.png?v=4" alt="Watchlist"><figcaption><span class="cap-text"><b>Watchlist</b> &mdash; opens the saved-assets window as an additional layer</span><a class="figma-link" target="_blank" href="https://www.figma.com/design/fZBkCMGoM4WavVNxHdHQRV/Fox-Area?node-id=7455-98774&t=yj0ExRLBvLIL2Doa-11">Figma ↗</a></figcaption></figure>
-            <figure class="shot"><img src="images/trade-dd-chat.png?v=4" alt="DD Chat"><figcaption><span class="cap-text"><b>DD Chat</b> &mdash; opens the chat window as an additional layer</span><a class="figma-link" target="_blank" href="https://www.figma.com/design/fZBkCMGoM4WavVNxHdHQRV/Fox-Area?node-id=7455-105310&t=yj0ExRLBvLIL2Doa-11">Figma ↗</a></figcaption></figure>
-            <figure class="shot"><img src="images/trade-market-info.png?v=4" alt="Market Info"><figcaption><span class="cap-text"><b>Market Info</b> &mdash; opens the info window as an additional layer</span><a class="figma-link" target="_blank" href="https://www.figma.com/design/fZBkCMGoM4WavVNxHdHQRV/Fox-Area?node-id=7455-101920&t=yj0ExRLBvLIL2Doa-11">Figma ↗</a></figcaption></figure>
+            <figure class="shot"><img src="images/trade-watchlist.png?v=5" alt="Watchlist"><figcaption><span class="cap-text"><b>Watchlist</b> &mdash; opens the saved-assets window as an additional layer</span><a class="figma-link" target="_blank" href="https://www.figma.com/design/fZBkCMGoM4WavVNxHdHQRV/Fox-Area?node-id=7455-98774&t=yj0ExRLBvLIL2Doa-11">Figma ↗</a></figcaption></figure>
+            <figure class="shot"><img src="images/trade-dd-chat.png?v=5" alt="DD Chat"><figcaption><span class="cap-text"><b>DD Chat</b> &mdash; opens the chat window as an additional layer</span><a class="figma-link" target="_blank" href="https://www.figma.com/design/fZBkCMGoM4WavVNxHdHQRV/Fox-Area?node-id=7455-105310&t=yj0ExRLBvLIL2Doa-11">Figma ↗</a></figcaption></figure>
+            <figure class="shot"><img src="images/trade-market-info.png?v=5" alt="Market Info"><figcaption><span class="cap-text"><b>Market Info</b> &mdash; opens the info window as an additional layer</span><a class="figma-link" target="_blank" href="https://www.figma.com/design/fZBkCMGoM4WavVNxHdHQRV/Fox-Area?node-id=7455-101920&t=yj0ExRLBvLIL2Doa-11">Figma ↗</a></figcaption></figure>
           </div>
         </li>
+        <li><b>Watchlist:</b> a global list of assets the player has saved, per user, including every asset from every category across all tournaments they've taken part in. Within any single tournament, only the assets relevant to that tournament are shown from this list.</li>
         <li><b>Asset screen:</b> feedback &mdash; too many details irrelevant to the trading experience; operation should be simplified. The "People also show interest in these stocks" area was removed.
           <div class="shots single">
-            <figure class="shot"><img src="images/trade-asset-screen.png?v=4" alt="Asset screen"><figcaption><span class="cap-text">Asset screen</span><a class="figma-link" target="_blank" href="https://www.figma.com/design/fZBkCMGoM4WavVNxHdHQRV/Fox-Area?node-id=7455-93775&t=yj0ExRLBvLIL2Doa-11">Figma ↗</a></figcaption></figure>
+            <figure class="shot"><img src="images/trade-asset-screen.png?v=5" alt="Asset screen"><figcaption><span class="cap-text">Asset screen</span><a class="figma-link" target="_blank" href="https://www.figma.com/design/fZBkCMGoM4WavVNxHdHQRV/Fox-Area?node-id=7455-93775&t=yj0ExRLBvLIL2Doa-11">Figma ↗</a></figcaption></figure>
           </div>
         </li>
         <li>The <b>Execute Buy</b> screen now sits in a floating drawer window, with a new option to add the asset to the watchlist.
           <div class="shots single">
-            <figure class="shot"><img src="images/trade-quick-swipe.png?v=4" alt="Execute Buy"><figcaption><span class="cap-text">Execute Buy</span><a class="figma-link" target="_blank" href="https://www.figma.com/design/fZBkCMGoM4WavVNxHdHQRV/Fox-Area?node-id=7455-96497&t=yj0ExRLBvLIL2Doa-11">Figma ↗</a></figcaption></figure>
+            <figure class="shot"><img src="images/trade-quick-swipe.png?v=5" alt="Execute Buy"><figcaption><span class="cap-text">Execute Buy</span><a class="figma-link" target="_blank" href="https://www.figma.com/design/fZBkCMGoM4WavVNxHdHQRV/Fox-Area?node-id=7455-96497&t=yj0ExRLBvLIL2Doa-11">Figma ↗</a></figcaption></figure>
           </div>
         </li>
       </ul>
@@ -434,34 +441,34 @@
       <ul class="feature-list lang-he">
         <li>הנתונים המוצגים לכל נכס: Entry value (קבוע או ממוצע עבור מספר נכסים), Current value (קבוע/ממוצע), שם הנכס, סוג הפעולה (קניה/מכירה בחסר), חיווי SL/TP, PnL בדולרים, PnL באחוזים.
           <div class="shots single">
-            <figure class="shot"><img src="images/portfolio-open-positions.png?v=4" alt="נתוני פוזיציה"><figcaption><span class="cap-text">נתוני פוזיציה</span><a class="figma-link" target="_blank" href="https://www.figma.com/design/fZBkCMGoM4WavVNxHdHQRV/Fox-Area?node-id=7455-111449&t=yj0ExRLBvLIL2Doa-11">Figma ↗</a></figcaption></figure>
+            <figure class="shot"><img src="images/portfolio-open-positions.png?v=5" alt="נתוני פוזיציה"><figcaption><span class="cap-text">נתוני פוזיציה</span><a class="figma-link" target="_blank" href="https://www.figma.com/design/fZBkCMGoM4WavVNxHdHQRV/Fox-Area?node-id=7455-111449&t=yj0ExRLBvLIL2Doa-11">Figma ↗</a></figcaption></figure>
           </div>
         </li>
         <li>גרירה שמאלה או לחיצה על נכס חושפת תפריט הכולל: Info, Flip, Modify, Close.
           <div class="shots single">
-            <figure class="shot"><img src="images/portfolio-position-menu.png?v=4" alt="תפריט פוזיציה"><figcaption><span class="cap-text">תפריט פוזיציה</span><a class="figma-link" target="_blank" href="https://www.figma.com/design/fZBkCMGoM4WavVNxHdHQRV/Fox-Area?node-id=7455-113219&t=yj0ExRLBvLIL2Doa-11">Figma ↗</a></figcaption></figure>
+            <figure class="shot"><img src="images/portfolio-position-menu.png?v=5" alt="תפריט פוזיציה"><figcaption><span class="cap-text">תפריט פוזיציה</span><a class="figma-link" target="_blank" href="https://www.figma.com/design/fZBkCMGoM4WavVNxHdHQRV/Fox-Area?node-id=7455-113219&t=yj0ExRLBvLIL2Doa-11">Figma ↗</a></figcaption></figure>
           </div>
           <ul>
             <li><b>Info</b> - פותח את חלון הנכס עם פרטי הנכס וגרף הכולל סימוני SL/TP ומחיר כניסה לפוזיציה. החלון מוצג בשתי תצורות:
               <div class="shots">
-                <figure class="shot"><img src="images/portfolio-info-multi.png?v=4" alt="מולטי פוזיציות"><figcaption><span class="cap-text">מולטי פוזיציות</span><a class="figma-link" target="_blank" href="https://www.figma.com/design/fZBkCMGoM4WavVNxHdHQRV/Fox-Area?node-id=7455-134977&t=yj0ExRLBvLIL2Doa-11">Figma ↗</a></figcaption></figure>
-                <figure class="shot"><img src="images/portfolio-info-single.png?v=4" alt="פוזיציה יחידה"><figcaption><span class="cap-text">פוזיציה יחידה</span><a class="figma-link" target="_blank" href="https://www.figma.com/design/fZBkCMGoM4WavVNxHdHQRV/Fox-Area?node-id=7455-139276&t=yj0ExRLBvLIL2Doa-11">Figma ↗</a></figcaption></figure>
+                <figure class="shot"><img src="images/portfolio-info-multi.png?v=5" alt="מולטי פוזיציות"><figcaption><span class="cap-text">מולטי פוזיציות</span><a class="figma-link" target="_blank" href="https://www.figma.com/design/fZBkCMGoM4WavVNxHdHQRV/Fox-Area?node-id=7455-134977&t=yj0ExRLBvLIL2Doa-11">Figma ↗</a></figcaption></figure>
+                <figure class="shot"><img src="images/portfolio-info-single.png?v=5" alt="פוזיציה יחידה"><figcaption><span class="cap-text">פוזיציה יחידה</span><a class="figma-link" target="_blank" href="https://www.figma.com/design/fZBkCMGoM4WavVNxHdHQRV/Fox-Area?node-id=7455-139276&t=yj0ExRLBvLIL2Doa-11">Figma ↗</a></figcaption></figure>
               </div>
             </li>
             <li><b>Flip</b> - פותח חלון ייעודי; השחקן יוכל להגדיר שמעתה הפקודה תבוצע בלחיצה בודדת.
               <div class="shots single">
-                <figure class="shot"><img src="images/portfolio-flip.png?v=4" alt="חלון Flip"><figcaption><span class="cap-text">חלון Flip</span><a class="figma-link" target="_blank" href="https://www.figma.com/design/fZBkCMGoM4WavVNxHdHQRV/Fox-Area?node-id=7187-60054&t=yj0ExRLBvLIL2Doa-11">Figma ↗</a></figcaption></figure>
+                <figure class="shot"><img src="images/portfolio-flip.png?v=5" alt="חלון Flip"><figcaption><span class="cap-text">חלון Flip</span><a class="figma-link" target="_blank" href="https://www.figma.com/design/fZBkCMGoM4WavVNxHdHQRV/Fox-Area?node-id=7187-60054&t=yj0ExRLBvLIL2Doa-11">Figma ↗</a></figcaption></figure>
               </div>
             </li>
             <li><b>Modify</b> - פותח חלון בעל 2 טאבים: הגדרת ערכי SL/TP, וסגירה חלקית של הפוזיציה.
               <div class="shots">
-                <figure class="shot"><img src="images/portfolio-modify-tab1.png?v=4" alt="Modify - טאב 1"><figcaption><span class="cap-text">Modify - טאב 1</span><a class="figma-link" target="_blank" href="https://www.figma.com/design/fZBkCMGoM4WavVNxHdHQRV/Fox-Area?node-id=7187-59599&t=yj0ExRLBvLIL2Doa-11">Figma ↗</a></figcaption></figure>
-                <figure class="shot"><img src="images/portfolio-modify-tab2.png?v=4" alt="Modify - טאב 2"><figcaption><span class="cap-text">Modify - טאב 2</span><a class="figma-link" target="_blank" href="https://www.figma.com/design/fZBkCMGoM4WavVNxHdHQRV/Fox-Area?node-id=7187-59776&t=yj0ExRLBvLIL2Doa-11">Figma ↗</a></figcaption></figure>
+                <figure class="shot"><img src="images/portfolio-modify-tab1.png?v=5" alt="Modify - טאב 1"><figcaption><span class="cap-text">Modify - טאב 1</span><a class="figma-link" target="_blank" href="https://www.figma.com/design/fZBkCMGoM4WavVNxHdHQRV/Fox-Area?node-id=7187-59599&t=yj0ExRLBvLIL2Doa-11">Figma ↗</a></figcaption></figure>
+                <figure class="shot"><img src="images/portfolio-modify-tab2.png?v=5" alt="Modify - טאב 2"><figcaption><span class="cap-text">Modify - טאב 2</span><a class="figma-link" target="_blank" href="https://www.figma.com/design/fZBkCMGoM4WavVNxHdHQRV/Fox-Area?node-id=7187-59776&t=yj0ExRLBvLIL2Doa-11">Figma ↗</a></figcaption></figure>
               </div>
             </li>
             <li><b>Close</b> - פותח חלון ייעודי; השחקן יוכל להגדיר שמעתה הפקודה תבוצע בלחיצה בודדת.
               <div class="shots single">
-                <figure class="shot"><img src="images/portfolio-close.png?v=4" alt="חלון Close"><figcaption><span class="cap-text">חלון Close</span><a class="figma-link" target="_blank" href="https://www.figma.com/design/fZBkCMGoM4WavVNxHdHQRV/Fox-Area?node-id=7187-59972&t=yj0ExRLBvLIL2Doa-11">Figma ↗</a></figcaption></figure>
+                <figure class="shot"><img src="images/portfolio-close.png?v=5" alt="חלון Close"><figcaption><span class="cap-text">חלון Close</span><a class="figma-link" target="_blank" href="https://www.figma.com/design/fZBkCMGoM4WavVNxHdHQRV/Fox-Area?node-id=7187-59972&t=yj0ExRLBvLIL2Doa-11">Figma ↗</a></figcaption></figure>
               </div>
             </li>
           </ul>
@@ -470,34 +477,34 @@
       <ul class="feature-list lang-en">
         <li>Data shown per asset: entry value (fixed or averaged across several assets), current value (fixed/averaged), asset name, action type (buy / short sell), SL/TP indicator, PnL in dollars, PnL in percent.
           <div class="shots single">
-            <figure class="shot"><img src="images/portfolio-open-positions.png?v=4" alt="Position data"><figcaption><span class="cap-text">Position data</span><a class="figma-link" target="_blank" href="https://www.figma.com/design/fZBkCMGoM4WavVNxHdHQRV/Fox-Area?node-id=7455-111449&t=yj0ExRLBvLIL2Doa-11">Figma ↗</a></figcaption></figure>
+            <figure class="shot"><img src="images/portfolio-open-positions.png?v=5" alt="Position data"><figcaption><span class="cap-text">Position data</span><a class="figma-link" target="_blank" href="https://www.figma.com/design/fZBkCMGoM4WavVNxHdHQRV/Fox-Area?node-id=7455-111449&t=yj0ExRLBvLIL2Doa-11">Figma ↗</a></figcaption></figure>
           </div>
         </li>
         <li>Swiping left or tapping an asset reveals a menu with: Info, Flip, Modify, Close.
           <div class="shots single">
-            <figure class="shot"><img src="images/portfolio-position-menu.png?v=4" alt="Position menu"><figcaption><span class="cap-text">Position menu</span><a class="figma-link" target="_blank" href="https://www.figma.com/design/fZBkCMGoM4WavVNxHdHQRV/Fox-Area?node-id=7455-113219&t=yj0ExRLBvLIL2Doa-11">Figma ↗</a></figcaption></figure>
+            <figure class="shot"><img src="images/portfolio-position-menu.png?v=5" alt="Position menu"><figcaption><span class="cap-text">Position menu</span><a class="figma-link" target="_blank" href="https://www.figma.com/design/fZBkCMGoM4WavVNxHdHQRV/Fox-Area?node-id=7455-113219&t=yj0ExRLBvLIL2Doa-11">Figma ↗</a></figcaption></figure>
           </div>
           <ul>
             <li><b>Info</b> &mdash; opens the asset window with asset details and a chart including SL/TP markers and position entry price. The window appears in two configurations:
               <div class="shots">
-                <figure class="shot"><img src="images/portfolio-info-multi.png?v=4" alt="Multi-position"><figcaption><span class="cap-text">Multi-position</span><a class="figma-link" target="_blank" href="https://www.figma.com/design/fZBkCMGoM4WavVNxHdHQRV/Fox-Area?node-id=7455-134977&t=yj0ExRLBvLIL2Doa-11">Figma ↗</a></figcaption></figure>
-                <figure class="shot"><img src="images/portfolio-info-single.png?v=4" alt="Single position"><figcaption><span class="cap-text">Single position</span><a class="figma-link" target="_blank" href="https://www.figma.com/design/fZBkCMGoM4WavVNxHdHQRV/Fox-Area?node-id=7455-139276&t=yj0ExRLBvLIL2Doa-11">Figma ↗</a></figcaption></figure>
+                <figure class="shot"><img src="images/portfolio-info-multi.png?v=5" alt="Multi-position"><figcaption><span class="cap-text">Multi-position</span><a class="figma-link" target="_blank" href="https://www.figma.com/design/fZBkCMGoM4WavVNxHdHQRV/Fox-Area?node-id=7455-134977&t=yj0ExRLBvLIL2Doa-11">Figma ↗</a></figcaption></figure>
+                <figure class="shot"><img src="images/portfolio-info-single.png?v=5" alt="Single position"><figcaption><span class="cap-text">Single position</span><a class="figma-link" target="_blank" href="https://www.figma.com/design/fZBkCMGoM4WavVNxHdHQRV/Fox-Area?node-id=7455-139276&t=yj0ExRLBvLIL2Doa-11">Figma ↗</a></figcaption></figure>
               </div>
             </li>
             <li><b>Flip</b> &mdash; opens a dedicated window; the player can set this action to execute with a single tap going forward.
               <div class="shots single">
-                <figure class="shot"><img src="images/portfolio-flip.png?v=4" alt="Flip window"><figcaption><span class="cap-text">Flip window</span><a class="figma-link" target="_blank" href="https://www.figma.com/design/fZBkCMGoM4WavVNxHdHQRV/Fox-Area?node-id=7187-60054&t=yj0ExRLBvLIL2Doa-11">Figma ↗</a></figcaption></figure>
+                <figure class="shot"><img src="images/portfolio-flip.png?v=5" alt="Flip window"><figcaption><span class="cap-text">Flip window</span><a class="figma-link" target="_blank" href="https://www.figma.com/design/fZBkCMGoM4WavVNxHdHQRV/Fox-Area?node-id=7187-60054&t=yj0ExRLBvLIL2Doa-11">Figma ↗</a></figcaption></figure>
               </div>
             </li>
             <li><b>Modify</b> &mdash; opens a window with 2 tabs: setting SL/TP values, and partial position close.
               <div class="shots">
-                <figure class="shot"><img src="images/portfolio-modify-tab1.png?v=4" alt="Modify - tab 1"><figcaption><span class="cap-text">Modify - tab 1</span><a class="figma-link" target="_blank" href="https://www.figma.com/design/fZBkCMGoM4WavVNxHdHQRV/Fox-Area?node-id=7187-59599&t=yj0ExRLBvLIL2Doa-11">Figma ↗</a></figcaption></figure>
-                <figure class="shot"><img src="images/portfolio-modify-tab2.png?v=4" alt="Modify - tab 2"><figcaption><span class="cap-text">Modify - tab 2</span><a class="figma-link" target="_blank" href="https://www.figma.com/design/fZBkCMGoM4WavVNxHdHQRV/Fox-Area?node-id=7187-59776&t=yj0ExRLBvLIL2Doa-11">Figma ↗</a></figcaption></figure>
+                <figure class="shot"><img src="images/portfolio-modify-tab1.png?v=5" alt="Modify - tab 1"><figcaption><span class="cap-text">Modify - tab 1</span><a class="figma-link" target="_blank" href="https://www.figma.com/design/fZBkCMGoM4WavVNxHdHQRV/Fox-Area?node-id=7187-59599&t=yj0ExRLBvLIL2Doa-11">Figma ↗</a></figcaption></figure>
+                <figure class="shot"><img src="images/portfolio-modify-tab2.png?v=5" alt="Modify - tab 2"><figcaption><span class="cap-text">Modify - tab 2</span><a class="figma-link" target="_blank" href="https://www.figma.com/design/fZBkCMGoM4WavVNxHdHQRV/Fox-Area?node-id=7187-59776&t=yj0ExRLBvLIL2Doa-11">Figma ↗</a></figcaption></figure>
               </div>
             </li>
             <li><b>Close</b> &mdash; opens a dedicated window; the player can set this action to execute with a single tap going forward.
               <div class="shots single">
-                <figure class="shot"><img src="images/portfolio-close.png?v=4" alt="Close window"><figcaption><span class="cap-text">Close window</span><a class="figma-link" target="_blank" href="https://www.figma.com/design/fZBkCMGoM4WavVNxHdHQRV/Fox-Area?node-id=7187-59972&t=yj0ExRLBvLIL2Doa-11">Figma ↗</a></figcaption></figure>
+                <figure class="shot"><img src="images/portfolio-close.png?v=5" alt="Close window"><figcaption><span class="cap-text">Close window</span><a class="figma-link" target="_blank" href="https://www.figma.com/design/fZBkCMGoM4WavVNxHdHQRV/Fox-Area?node-id=7187-59972&t=yj0ExRLBvLIL2Doa-11">Figma ↗</a></figcaption></figure>
               </div>
             </li>
           </ul>
@@ -510,48 +517,70 @@
           <ul>
             <li><b>Flip</b> - השחקן יוכל להגדיר שמעתה הפקודה תבוצע בלחיצה בודדת.
               <div class="shots single">
-                <figure class="shot"><img src="images/orders-flip.png?v=4" alt="חלון Flip"><figcaption><span class="cap-text">חלון Flip</span><a class="figma-link" target="_blank" href="https://www.figma.com/design/fZBkCMGoM4WavVNxHdHQRV/Fox-Area?node-id=7455-121444&t=yj0ExRLBvLIL2Doa-11">Figma ↗</a></figcaption></figure>
+                <figure class="shot"><img src="images/orders-flip.png?v=5" alt="חלון Flip"><figcaption><span class="cap-text">חלון Flip</span><a class="figma-link" target="_blank" href="https://www.figma.com/design/fZBkCMGoM4WavVNxHdHQRV/Fox-Area?node-id=7455-121444&t=yj0ExRLBvLIL2Doa-11">Figma ↗</a></figcaption></figure>
               </div>
             </li>
             <li><b>Modify</b> - מאפשר שינוי כל פרמטרי הפקודה, בתנאי שביצועה טרם החל.
               <div class="shots single">
-                <figure class="shot"><img src="images/orders-modify.png?v=4" alt="חלון Modify"><figcaption><span class="cap-text">חלון Modify</span><a class="figma-link" target="_blank" href="https://www.figma.com/design/fZBkCMGoM4WavVNxHdHQRV/Fox-Area?node-id=7457-91737&t=yj0ExRLBvLIL2Doa-11">Figma ↗</a></figcaption></figure>
+                <figure class="shot"><img src="images/orders-modify.png?v=5" alt="חלון Modify"><figcaption><span class="cap-text">חלון Modify</span><a class="figma-link" target="_blank" href="https://www.figma.com/design/fZBkCMGoM4WavVNxHdHQRV/Fox-Area?node-id=7457-91737&t=yj0ExRLBvLIL2Doa-11">Figma ↗</a></figcaption></figure>
               </div>
             </li>
             <li><b>Cancel</b> - השחקן יוכל להגדיר שמעתה הפקודה תבוצע בלחיצה בודדת.
               <div class="shots single">
-                <figure class="shot"><img src="images/orders-cancel.png?v=4" alt="חלון Cancel"><figcaption><span class="cap-text">חלון Cancel</span><a class="figma-link" target="_blank" href="https://www.figma.com/design/fZBkCMGoM4WavVNxHdHQRV/Fox-Area?node-id=7235-114892&t=yj0ExRLBvLIL2Doa-11">Figma ↗</a></figcaption></figure>
+                <figure class="shot"><img src="images/orders-cancel.png?v=5" alt="חלון Cancel"><figcaption><span class="cap-text">חלון Cancel</span><a class="figma-link" target="_blank" href="https://www.figma.com/design/fZBkCMGoM4WavVNxHdHQRV/Fox-Area?node-id=7235-114892&t=yj0ExRLBvLIL2Doa-11">Figma ↗</a></figcaption></figure>
               </div>
             </li>
           </ul>
         </li>
+        <li>לכל שורת פקודה יופיע חיווי סטטוס: <b>PENDING</b> (ממתינה לביצוע), <b>CANCELLED</b> (בוטלה) או <b>FILLED</b> (בוצעה).</li>
       </ul>
       <ul class="feature-list lang-en">
         <li>Swiping or tapping a pending order shows the player 3 options:
           <ul>
             <li><b>Flip</b> &mdash; the player can set this action to execute with a single tap going forward.
               <div class="shots single">
-                <figure class="shot"><img src="images/orders-flip.png?v=4" alt="Flip window"><figcaption><span class="cap-text">Flip window</span><a class="figma-link" target="_blank" href="https://www.figma.com/design/fZBkCMGoM4WavVNxHdHQRV/Fox-Area?node-id=7455-121444&t=yj0ExRLBvLIL2Doa-11">Figma ↗</a></figcaption></figure>
+                <figure class="shot"><img src="images/orders-flip.png?v=5" alt="Flip window"><figcaption><span class="cap-text">Flip window</span><a class="figma-link" target="_blank" href="https://www.figma.com/design/fZBkCMGoM4WavVNxHdHQRV/Fox-Area?node-id=7455-121444&t=yj0ExRLBvLIL2Doa-11">Figma ↗</a></figcaption></figure>
               </div>
             </li>
             <li><b>Modify</b> &mdash; allows changing all order parameters, as long as execution hasn't started.
               <div class="shots single">
-                <figure class="shot"><img src="images/orders-modify.png?v=4" alt="Modify window"><figcaption><span class="cap-text">Modify window</span><a class="figma-link" target="_blank" href="https://www.figma.com/design/fZBkCMGoM4WavVNxHdHQRV/Fox-Area?node-id=7457-91737&t=yj0ExRLBvLIL2Doa-11">Figma ↗</a></figcaption></figure>
+                <figure class="shot"><img src="images/orders-modify.png?v=5" alt="Modify window"><figcaption><span class="cap-text">Modify window</span><a class="figma-link" target="_blank" href="https://www.figma.com/design/fZBkCMGoM4WavVNxHdHQRV/Fox-Area?node-id=7457-91737&t=yj0ExRLBvLIL2Doa-11">Figma ↗</a></figcaption></figure>
               </div>
             </li>
             <li><b>Cancel</b> &mdash; the player can set this action to execute with a single tap going forward.
               <div class="shots single">
-                <figure class="shot"><img src="images/orders-cancel.png?v=4" alt="Cancel window"><figcaption><span class="cap-text">Cancel window</span><a class="figma-link" target="_blank" href="https://www.figma.com/design/fZBkCMGoM4WavVNxHdHQRV/Fox-Area?node-id=7235-114892&t=yj0ExRLBvLIL2Doa-11">Figma ↗</a></figcaption></figure>
+                <figure class="shot"><img src="images/orders-cancel.png?v=5" alt="Cancel window"><figcaption><span class="cap-text">Cancel window</span><a class="figma-link" target="_blank" href="https://www.figma.com/design/fZBkCMGoM4WavVNxHdHQRV/Fox-Area?node-id=7235-114892&t=yj0ExRLBvLIL2Doa-11">Figma ↗</a></figcaption></figure>
               </div>
             </li>
           </ul>
         </li>
+        <li>Every order row shows a status indicator: <b>PENDING</b>, <b>CANCELLED</b>, or <b>FILLED</b>.</li>
+      </ul>
+
+      <h4><span class="lang-he">Trade History</span><span class="lang-en">Trade History</span></h4>
+      <ul class="feature-list lang-he">
+        <li><b>שורת Close (סגירה):</b> side, כמות שנסגרה, מחיר סגירה, PnL ממומש (סכום וגם אחוזים), חותמת זמן.</li>
+        <li><b>שורת Open (פתיחה):</b> side (BUY/SELL), כמות, מחיר כניסה, חותמת זמן. ללא PnL ממומש (הפוזיציה עדיין פתוחה).
+          <div class="shots single">
+            <figure class="shot"><img src="images/portfolio-history.png?v=5" alt="Trade History"><figcaption><span class="cap-text">Trade History</span></figcaption></figure>
+          </div>
+        </li>
+        <li>פוזיציות שעדיין פתוחות ימשיכו להופיע גם בטאב Positions; כעת הן יופיעו גם בהיסטוריה - עם אירוע הפתיחה שלהן.</li>
+      </ul>
+      <ul class="feature-list lang-en">
+        <li><b>Close row:</b> side, quantity closed, close price, realized P&amp;L (amount + %), timestamp.</li>
+        <li><b>Open row:</b> side (BUY/SELL), quantity, entry price, timestamp. No realized P&amp;L (position is still open).
+          <div class="shots single">
+            <figure class="shot"><img src="images/portfolio-history.png?v=5" alt="Trade History"><figcaption><span class="cap-text">Trade History</span></figcaption></figure>
+          </div>
+        </li>
+        <li>Still-open positions continue to appear in the Positions tab; they now also show their open event in history.</li>
       </ul>
 
       <p class="lang-he">הגדרת Single Click תיצור התראת in-app לשחקן, המסבירה שניתן לנהל את ההגדרה במקום הבא:</p>
       <p class="lang-en">Enabling Single Click will create an in-app notification for the player, explaining that this setting can be managed here:</p>
       <div class="shots single">
-        <figure class="shot"><img src="images/single-click-settings.png?v=4" alt="Trade Preferences"><figcaption><span class="cap-text lang-he">מסך ההגדרה</span><span class="cap-text lang-en">Settings screen</span><a class="figma-link" target="_blank" href="https://www.figma.com/design/fZBkCMGoM4WavVNxHdHQRV/Fox-Area?node-id=7457-94848&t=yj0ExRLBvLIL2Doa-11">Figma ↗</a></figcaption></figure>
+        <figure class="shot"><img src="images/single-click-settings.png?v=5" alt="Trade Preferences"><figcaption><span class="cap-text lang-he">מסך ההגדרה</span><span class="cap-text lang-en">Settings screen</span><a class="figma-link" target="_blank" href="https://www.figma.com/design/fZBkCMGoM4WavVNxHdHQRV/Fox-Area?node-id=7457-94848&t=yj0ExRLBvLIL2Doa-11">Figma ↗</a></figcaption></figure>
       </div>
 
       <h4><span class="lang-he">נוטיפיקציה (In-App בלבד)</span><span class="lang-en">Notification (In-App only)</span></h4>
